@@ -4,7 +4,6 @@ import { BaseDTO } from "./Base.dto";
 export class RoleDTO extends BaseDTO {
 	id: number;
 	rolename: string;
-	status: string;
 	insertUser: string;
 	insertDatetime: Date;
 	updatedUser: string | null;

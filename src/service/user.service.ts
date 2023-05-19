@@ -56,8 +56,6 @@ export class UserService {
 		user001mb.roleid = userDTO.roleid;
 		user001mb.status = userDTO.status;
 		user001mb.email = userDTO.email;
-		user001mb.securityquestion = userDTO.securityquestion;
-		user001mb.securityanswer = userDTO.securityanswer;
 		user001mb.updatedUser = userDTO.updatedUser;
 		user001mb.updatedDatetime = userDTO.updatedDatetime;
 		user001mb.updatedUser = userDTO.updatedUser;
@@ -82,11 +80,11 @@ export class UserService {
 		return this.userRepository.save(user001mb);
 	}
 
-	async update1(updateTheme: any): Promise<User001mb> {
-		const user001mb = await this.userRepository.findOne({ where: { personId: updateTheme.personId } });
-		user001mb.theme = updateTheme.theme;
-		return this.userRepository.save(user001mb);
-	}
+	// async update1(updateTheme: any): Promise<User001mb> {
+	// 	const user001mb = await this.userRepository.findOne({ where: { personId: updateTheme.personId } });
+	// 	user001mb.theme = updateTheme.theme;
+	// 	return this.userRepository.save(user001mb);
+	// }
 
 	async findAll(): Promise<User001mb[]> {
 		return this.userRepository.find({ relations: ["role"] });

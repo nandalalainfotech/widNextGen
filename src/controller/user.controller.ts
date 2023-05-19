@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger/dist/decorators/api-bearer.decorator';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UserDTO } from 'src/dto/User.dto';
 import { User001mb } from 'src/entity/User001mb';
@@ -7,7 +8,7 @@ import { Role } from 'src/role/role.enum';
 import { RolesGuard } from 'src/role/role.guard';
 import { UserService } from 'src/service/user.service';
 
-
+@ApiBearerAuth()
 @Controller('/wdinextgen/api/user')
 export class UserController {
 	constructor(private readonly userService: UserService) { }
@@ -47,12 +48,12 @@ export class UserController {
 		return this.userService.updateRole(roleid);
 	}
 
-	@hasRole(Role.superadmin)
-	@UseGuards(JwtAuthGuard, RolesGuard)
-	@Post("updateUserTheme")
-	updateUserTheme(@Body() updateTheme: any): Promise<User001mb> {
-		return this.userService.update1(updateTheme);
-	}
+	// @hasRole(Role.superadmin)
+	// @UseGuards(JwtAuthGuard, RolesGuard)
+	// @Post("updateUserTheme")
+	// updateUserTheme(@Body() updateTheme: any): Promise<User001mb> {
+	// 	return this.userService.update1(updateTheme);
+	// }
 
 	@hasRole(Role.superadmin)
 	@UseGuards(JwtAuthGuard, RolesGuard)

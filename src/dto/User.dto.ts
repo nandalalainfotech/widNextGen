@@ -15,9 +15,6 @@ export class UserDTO  {
     password: string;
     status: string;
     email: string;
-    securityquestion: string;
-    securityanswer: string;
-    theme: string | null;
     insertUser: string;
     insertDatetime: Date;
     updatedUser: string | null;
@@ -37,9 +34,6 @@ export class UserDTO  {
         this.password = user001mb.password;
         this.status = user001mb.status;
         this.email = user001mb.email;
-        this.securityquestion = user001mb.securityquestion;
-        this.securityanswer = user001mb.securityanswer;
-        this.theme = user001mb.theme;
         this.insertUser = user001mb.insertUser;
         this.insertDatetime = user001mb.insertDatetime;
         this.updatedUser = user001mb.updatedUser;

@@ -17,15 +17,15 @@ export class AuthService {
 	constructor(@InjectRepository(User001mb) private readonly userRepository: Repository<User001mb>,
 		private readonly jwtService: JwtService) { }
 
-	generateJwt(username, status, securityquestion, securityanswer, role): Observable<string> {
+	generateJwt(username, status, role): Observable<string> {
 		const payload = {
-			username: username, status: status, securityquestion: securityquestion, securityanswer: securityanswer, role: role
+			username: username, status: status, role: role
 		};
 		return from(this.jwtService.signAsync(payload));
 	}
 
-	async getUserAuthentication(username: string, password: string) {
-		console.log("username,password==>23", username,password);
+	async getUserAuthentication( password: string, username: string) {
+		// console.log("username,password", username,password);
 		const user001mb: User001mb = await this.userRepository.findOne({ relations: [ 'role'], where: { username: username } });
 		let userDTO = new UserDTO();
 
@@ -42,7 +42,7 @@ export class AuthService {
 			 if (user001mb) {
 				userDTO.setProperties(user001mb);
 				userDTO.password = null;
-				return this.generateJwt(user001mb.username, user001mb.status, user001mb.securityquestion, user001mb.securityanswer, user001mb.role.rolename).pipe(map((jwt: string) => {
+				return this.generateJwt(user001mb.username, user001mb.status, user001mb.role.rolename).pipe(map((jwt: string) => {
 					return { userDTO, access_token: jwt };
 				})
 				)

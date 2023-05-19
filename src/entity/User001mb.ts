@@ -37,20 +37,6 @@ export class User001mb {
   @Column("varchar", { name: "email", length: 30 })
   email: string;
 
-  @Column("varchar", { name: "securityquestion", length: 250 })
-  securityquestion: string;
-
-  @Column("varchar", { name: "securityanswer", length: 250 })
-  securityanswer: string;
-
-  @Column("varchar", {
-    name: "theme",
-    nullable: true,
-    length: 10,
-    default: () => "'#286090'",
-  })
-  theme: string | null;
-
   @Column("varchar", { name: "insert_user", length: 40 })
   insertUser: string;
 
@@ -81,9 +67,6 @@ export class User001mb {
     this.password = userDTO.password;
     this.status = userDTO.status;
     this.email = userDTO.email;
-    this.securityquestion = userDTO.securityquestion;
-    this.securityanswer = userDTO.securityanswer;
-    this.theme = userDTO.theme;
     this.insertUser = userDTO.insertUser;
     this.insertDatetime = userDTO.insertDatetime;
     this.updatedUser = userDTO.updatedUser;

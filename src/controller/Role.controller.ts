@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger/dist/decorators/api-bearer.decorator';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RoleDTO } from 'src/dto/Role.dto';
 import { Role001mb } from 'src/entity/Role001mb';
@@ -8,8 +9,8 @@ import { RolesGuard } from 'src/role/role.guard';
 import { RoleService } from 'src/service/Role.service';
 
 
-
-@Controller('/wdinextgen/api/role')
+@ApiBearerAuth()
+@Controller('/wdinextgen/api/roles')
 export class RoleController {
 	constructor(private readonly roleService: RoleService) { }
 
@@ -17,6 +18,7 @@ export class RoleController {
 	@UseGuards(JwtAuthGuard, RolesGuard)
 	@Post("save")
 	create(@Body() roleDTO: RoleDTO): Promise<Role001mb> {
+		console.log("roleDTO==>22", roleDTO);
 		return this.roleService.create(roleDTO);
 	}
 
@@ -31,6 +33,7 @@ export class RoleController {
 	@UseGuards(JwtAuthGuard, RolesGuard)
 	@Get('findAll')
 	findAll(): Promise<Role001mb[]> {
+		console.log("Role001mb==>22", Role001mb);
 		return this.roleService.findAll();
 	}
 
