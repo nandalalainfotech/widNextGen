@@ -32,16 +32,30 @@ export class AuthService {
 		if (user001mb) {
 			const isMatch = await bcrypt.compare(username, user001mb.username);
 
-			// if (unitdeptslno != user001mb.unitslno) {
-			// 	throw new HttpException('Please Select Correct Unit', HttpStatus.INTERNAL_SERVER_ERROR);
-			// }
-			// else if (dpslno != user001mb.dpslno2.slNo) {
-			// 	throw new HttpException('Please Select Correct Department', HttpStatus.INTERNAL_SERVER_ERROR);
-			// }
-			// else
+			// .addSecurityDefination("Bearer", new OpenApiSecurityScheme{
+				
+			// 	Description = "please insert token",
+			// 	Name = "Authoraization",
+			// 	Type = securityType.Http,
+			// 	Bearerformat = "JWT",
+			// 	Scheme = "Bearer"
+		  
+			//   });
+			//   .addSecurityRequirement {
+			// 	{
+			// 	  new OpenApiSecurityScheme{
+			// 		Reference = new OpenApiReference {
+			// 		  type = ReferenceType. SecurityScheme, 
+			// 		  Id = "Bearer"
+			// 		}
+			// 	  },
+			// 	  new string[] {}
+			// 	}
+			//   }																																																								
 			 if (user001mb) {
 				userDTO.setProperties(user001mb);
 				userDTO.password = null;
+				
 				return this.generateJwt(user001mb.username, user001mb.status, user001mb.role.rolename).pipe(map((jwt: string) => {
 					return { userDTO, access_token: jwt };
 				})

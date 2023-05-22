@@ -18,6 +18,7 @@ export class UserController {
 	@Post("Registersave")
 	create1(@Body() userDTO: UserDTO): Promise<User001mb> {
 		return this.userService.create(userDTO);
+		
 	}
 
 	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)

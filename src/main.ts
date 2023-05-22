@@ -11,12 +11,20 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('WDINEXTGEN')
+    
     .setDescription('The wdinextgen API description')
     .setVersion('1.0')
+    
     .addTag('WDI')
-    .addBearerAuth('Authorization', 'header', 'basic')
+    // .addBearerAuth('Authorization', 'header', 'basic')
+    .addBearerAuth('Authorization: Bearer your_auth_token')
+    
+
+    // Host: api.example.com
+    // Authorization: Bearer your_auth_token   
     .setHost('localhost:3000')
     .build();
+    
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
@@ -26,5 +34,6 @@ async function bootstrap() {
   await app.listen(3000);
   // await app.listen(3000, "0.0.0.0");
   console.log(`Application is running on: ${await app.getUrl()}`);
+  
 }
 bootstrap();
