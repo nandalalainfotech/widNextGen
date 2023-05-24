@@ -6,23 +6,14 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-
 import { Role001mb } from "./Role001mb";
 import { UserDTO } from "src/dto/User.dto";
 
-@Index("unitslno", ["unitslno"], {})
-@Index("dpslno", ["dpslno"], {})
 @Index("roleid", ["roleid"], {})
 @Entity("user001mb", { schema: "wdinextgen" })
 export class User001mb {
   @PrimaryGeneratedColumn({ type: "int", name: "person_id" })
   personId: number;
-
-  @Column("int", { name: "unitslno" })
-  unitslno: number;
-
-  @Column("int", { name: "dpslno" })
-  dpslno: number;
 
   @Column("int", { name: "roleid" })
   roleid: number;
@@ -60,14 +51,6 @@ export class User001mb {
   @Column("varchar", { name: "mobile_no", nullable: true, length: 250 })
   mobileNo: string | null;
 
-  // @ManyToOne(
-  //   () => Unitmaster001mb,
-  //   (unitmaster001mb) => unitmaster001mb.user001mbs,
-  //   { onDelete: "RESTRICT", onUpdate: "RESTRICT" }
-  // )
-  // @JoinColumn([{ name: "unitslno", referencedColumnName: "slNo" }])
-  // unitslno2: Unitmaster001mb;
-
   @ManyToOne(() => Role001mb, (role001mb) => role001mb.user001mbs, {
     onDelete: "CASCADE",
     onUpdate: "RESTRICT",
@@ -86,8 +69,6 @@ export class User001mb {
     this.status = userDTO.status;
     this.email = userDTO.email;
     this.mobileNo = userDTO.mobileNo;
-    this.unitslno = userDTO.unitslno;
-    this.dpslno = userDTO.dpslno;
     this.insertUser = userDTO.insertUser;
     this.insertDatetime = userDTO.insertDatetime;
     this.updatedUser = userDTO.updatedUser;

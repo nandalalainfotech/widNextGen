@@ -7,10 +7,7 @@ import { User001mb } from "src/entity/User001mb";
 
 export class UserDTO  {
     personId: number;
-    @ApiModelProperty({})
-    unitslno: number;
-    @ApiModelProperty({})
-    dpslno: number;
+
     @ApiModelProperty({})
     firstname: string;
     @ApiModelProperty({})
@@ -47,8 +44,6 @@ export class UserDTO  {
         this.status = user001mb.status;
         this.email = user001mb.email;
         this.mobileNo = user001mb.mobileNo;
-        this.unitslno = user001mb.unitslno;
-        this.dpslno = user001mb.dpslno;
         this.insertUser = user001mb.insertUser;
         this.insertDatetime = user001mb.insertDatetime;
         this.updatedUser = user001mb.updatedUser;

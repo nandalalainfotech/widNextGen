@@ -20,6 +20,7 @@ export class RoleService {
 	}
 
 	async findAll(): Promise<Role001mb[]> {
+		console.log("Role001mb", Role001mb);
 		return this.roleRepository.find();
 	}
 	findOne(id: number): Promise<Role001mb> {
