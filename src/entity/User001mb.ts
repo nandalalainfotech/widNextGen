@@ -6,7 +6,6 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-
 import { Role001mb } from "./Role001mb";
 import { UserDTO } from "src/dto/User.dto";
 
@@ -37,20 +36,6 @@ export class User001mb {
   @Column("varchar", { name: "email", length: 30 })
   email: string;
 
-  @Column("varchar", { name: "securityquestion", length: 250 })
-  securityquestion: string;
-
-  @Column("varchar", { name: "securityanswer", length: 250 })
-  securityanswer: string;
-
-  @Column("varchar", {
-    name: "theme",
-    nullable: true,
-    length: 10,
-    default: () => "'#286090'",
-  })
-  theme: string | null;
-
   @Column("varchar", { name: "insert_user", length: 40 })
   insertUser: string;
 
@@ -63,6 +48,8 @@ export class User001mb {
   @Column("datetime", { name: "updated_datetime", nullable: true })
   updatedDatetime: Date | null;
 
+  @Column("varchar", { name: "mobile_no", nullable: true, length: 250 })
+  mobileNo: string | null;
 
   @ManyToOne(() => Role001mb, (role001mb) => role001mb.user001mbs, {
     onDelete: "CASCADE",
@@ -81,9 +68,7 @@ export class User001mb {
     this.password = userDTO.password;
     this.status = userDTO.status;
     this.email = userDTO.email;
-    this.securityquestion = userDTO.securityquestion;
-    this.securityanswer = userDTO.securityanswer;
-    this.theme = userDTO.theme;
+    this.mobileNo = userDTO.mobileNo;
     this.insertUser = userDTO.insertUser;
     this.insertDatetime = userDTO.insertDatetime;
     this.updatedUser = userDTO.updatedUser;

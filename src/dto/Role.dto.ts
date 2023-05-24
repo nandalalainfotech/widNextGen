@@ -1,11 +1,15 @@
 import { Role001mb } from "src/entity/Role001mb";
 import { BaseDTO } from "./Base.dto";
+import { ApiModelProperty } from "@nestjs/swagger";
 
 export class RoleDTO extends BaseDTO {
+	
 	id: number;
+	@ApiModelProperty({})
 	rolename: string;
-	status: string;
+	@ApiModelProperty({})
 	insertUser: string;
+	
 	insertDatetime: Date;
 	updatedUser: string | null;
 	updatedDatetime: Date | null;

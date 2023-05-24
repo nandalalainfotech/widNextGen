@@ -1,4 +1,5 @@
 
+import { ApiModelProperty } from "@nestjs/swagger/dist/decorators/api-model-property.decorator";
 import { Role001mb } from "src/entity/Role001mb";
 import { User001mb } from "src/entity/User001mb";
 
@@ -6,18 +7,23 @@ import { User001mb } from "src/entity/User001mb";
 
 export class UserDTO  {
     personId: number;
-    unitslno: number;
-    dpslno: number;
+
+    @ApiModelProperty({})
     firstname: string;
+    @ApiModelProperty({})
     lastname: string;
+    @ApiModelProperty({})
     username: string;
+    @ApiModelProperty({})
     roleid: number;
+    @ApiModelProperty({})
     password: string;
+    @ApiModelProperty({})
     status: string;
+    @ApiModelProperty({})
     email: string;
-    securityquestion: string;
-    securityanswer: string;
-    theme: string | null;
+    @ApiModelProperty({})
+    mobileNo: string | null;
     insertUser: string;
     insertDatetime: Date;
     updatedUser: string | null;
@@ -37,9 +43,7 @@ export class UserDTO  {
         this.password = user001mb.password;
         this.status = user001mb.status;
         this.email = user001mb.email;
-        this.securityquestion = user001mb.securityquestion;
-        this.securityanswer = user001mb.securityanswer;
-        this.theme = user001mb.theme;
+        this.mobileNo = user001mb.mobileNo;
         this.insertUser = user001mb.insertUser;
         this.insertDatetime = user001mb.insertDatetime;
         this.updatedUser = user001mb.updatedUser;
