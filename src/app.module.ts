@@ -8,7 +8,9 @@ import { RoleModule } from './module/role.module';
 import { UserModule } from './module/user.module';
 
 
+
 @Module({
+
     imports: [
         ConfigModule.forRoot({
             isGlobal: true,
@@ -39,7 +41,8 @@ import { UserModule } from './module/user.module';
         RoleModule,
         UserModule,
         
-    ]
+    ],
+
 })
 
 export class AppModule { }
