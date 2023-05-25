@@ -34,6 +34,7 @@ export class UserService {
 		await this.userRepository.save(user001mb);
 		// await this.mailService.sendUserConfirmation(user001mb);
 		console.log("user001mb==>22", user001mb);
+		user001mb.password="";
 		return user001mb;
 	}
 
