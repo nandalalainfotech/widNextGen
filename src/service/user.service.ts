@@ -26,13 +26,14 @@ export class UserService {
 		}
 		const user001mb = new User001mb();
 		user001mb.setProperties(userDTO);  
-		user001mb.password = "erpnext001";
+		user001mb.password = "wdinextgen001";
 		const hash = await bcrypt.hash(user001mb.password, this.saltRounds);
 		user001mb.password = hash;
 		// user001mb.dpslno2.department = userDTO.dpslno2.department;
 
 		await this.userRepository.save(user001mb);
-		await this.mailService.sendUserConfirmation(user001mb);
+		// await this.mailService.sendUserConfirmation(user001mb);
+		console.log("user001mb==>22", user001mb);
 		return user001mb;
 	}
 
