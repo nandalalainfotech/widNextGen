@@ -7,57 +7,37 @@ import { from, Observable } from 'rxjs';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { map } from 'rxjs/operators';
-import { User001mb } from 'src/entity/User001mb';
-import { UserDTO } from 'src/dto/User.dto';
+import { Users001mb } from 'src/entity/Users001mb';
+import { UsersDTO } from 'src/dto/Users.dto';
+;
 
 
 @Injectable()
 export class AuthService {
 
-	constructor(@InjectRepository(User001mb) private readonly userRepository: Repository<User001mb>,
+	constructor(@InjectRepository(Users001mb) private readonly usersRepository: Repository<Users001mb>,
 		private readonly jwtService: JwtService) { }
 
-	generateJwt(username, status, role): Observable<string> {
+	generateJwt(username, status, role001mbs): Observable<string> {
 		const payload = {
-			username: username, status: status, role: role
+			username: username, status: status, role: role001mbs
 		};
 		return from(this.jwtService.signAsync(payload));
 	}
 
 	async getUserAuthentication( password: string, username: string) {
-		// console.log("username,password", username,password);
-		const user001mb: User001mb = await this.userRepository.findOne({ relations: [ 'role'], where: { username: username } });
-		let userDTO = new UserDTO();
+		console.log("username,password==>",password, username);
+		const users001mb: Users001mb = await this.usersRepository.findOne({ relations: [ 'role001mbs'], where: { username: username } });
+		let usersDTO = new UsersDTO();
 
-		if (user001mb) {
-			const isMatch = await bcrypt.compare(username, user001mb.username);
-
-			// .addSecurityDefination("Bearer", new OpenApiSecurityScheme{
+		if (users001mb) {
+			const isMatch = await bcrypt.compare(password, users001mb.password);																																																							
+			 if (users001mb) {
+				usersDTO.setProperties(users001mb);
+				usersDTO.password = null;
 				
-			// 	Description = "please insert token",
-			// 	Name = "Authoraization",
-			// 	Type = securityType.Http,
-			// 	Bearerformat = "JWT",
-			// 	Scheme = "Bearer"
-		  
-			//   });
-			//   .addSecurityRequirement {
-			// 	{
-			// 	  new OpenApiSecurityScheme{
-			// 		Reference = new OpenApiReference {
-			// 		  type = ReferenceType. SecurityScheme, 
-			// 		  Id = "Bearer"
-			// 		}
-			// 	  },
-			// 	  new string[] {}
-			// 	}
-			//   }																																																								
-			 if (user001mb) {
-				userDTO.setProperties(user001mb);
-				userDTO.password = null;
-				
-				return this.generateJwt(user001mb.username, user001mb.status, user001mb.role.rolename).pipe(map((jwt: string) => {
-					return { userDTO, access_token: jwt };
+				return this.generateJwt(users001mb.username, users001mb.status, users001mb.role001mbs).pipe(map((jwt: string) => {
+					return { usersDTO, access_token: jwt };
 				})
 				)
 			} 

@@ -15,16 +15,12 @@ export class RoleService {
 	async update(roleDTO: RoleDTO): Promise<Role001mb> {
 		const role001mb = new Role001mb();
 		role001mb.setProperties(roleDTO);
-		await this.roleRepository.update({ id: role001mb.id }, role001mb);
+		await this.roleRepository.update({ roleId: role001mb.roleId }, role001mb);
 		return role001mb;
 	}
 
 	async findAll(): Promise<Role001mb[]> {
-		console.log("Role001mb", Role001mb);
 		return this.roleRepository.find();
-	}
-	findOne(id: number): Promise<Role001mb> {
-		return this.roleRepository.findOne(id);
 	}
 
 	async remove(id: number): Promise<void> {

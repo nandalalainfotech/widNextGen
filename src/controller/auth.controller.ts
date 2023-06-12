@@ -6,7 +6,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AuthService } from 'src/auth/services/auth.service';
 
 @ApiBearerAuth()
-@Controller('/wdinextgen/api/auth')
+@Controller('/wdinext/api/auth')
 export class AuthController {
 	constructor(private AuthService: AuthService) { }
 
