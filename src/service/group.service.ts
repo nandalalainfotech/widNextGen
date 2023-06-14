@@ -24,6 +24,10 @@ export class GroupService {
 		return this.groupRepository.find();
 	}
 
+	async findOne(groupId: number): Promise<Group001mb> {
+		return this.groupRepository.findOne(groupId);
+	}
+
 	async remove(id: number): Promise<void> {
 		await this.groupRepository.delete(id);
 	}

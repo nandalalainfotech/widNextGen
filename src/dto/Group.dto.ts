@@ -11,6 +11,8 @@ export class GroupDTO extends BaseDTO {
     @ApiModelProperty({})
     roleId: number | null;
 
+  
+
 
     setProperties(group001mb: Group001mb) {
         this.groupId = group001mb.groupId;

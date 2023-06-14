@@ -16,9 +16,9 @@ export class AuthController {
 		
 	}
 
-	@UseGuards(JwtAuthGuard)
-	@Get('test')
-	async test() {
-		return 'Success!';
-	}
+	// @UseGuards(JwtAuthGuard)
+	// @Get('test')
+	// async test() {
+	// 	return 'Success!';
+	// }
 }

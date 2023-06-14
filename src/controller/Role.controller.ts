@@ -3,10 +3,7 @@ import { ApiBearerAuth } from '@nestjs/swagger/dist/decorators/api-bearer.decora
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RoleDTO } from 'src/dto/Role.dto';
 import { Role001mb } from 'src/entity/Role001mb';
-import { hasRole } from 'src/role001mbs/role001mbs.decorator';
-import { Role001mbs } from 'src/role001mbs/role001mbs.enum';
 import { Role001mbsGuard } from 'src/role001mbs/role001mbs.guard';
-
 import { RoleService } from 'src/service/Role.service';
 
 
@@ -17,30 +14,35 @@ export class RoleController {
 
 	// @hasRole(Role001mbs.superadmin)
 	@UseGuards(JwtAuthGuard, Role001mbsGuard)
-	@Post("save")
+	@Post("")
 	create(@Body() roleDTO: RoleDTO): Promise<Role001mb> {
-		console.log("roleDTO==>22", roleDTO);
 		return this.roleService.create(roleDTO);
 	}
 
 	// @hasRole(Role001mbs.superadmin)
 	@UseGuards(JwtAuthGuard, Role001mbsGuard)
-	@Put("update")
+	@Put(":id")
 	update(@Body() roleDTO: RoleDTO): Promise<Role001mb> {
 		return this.roleService.update(roleDTO);
 	}
 
 	// @hasRole(Role001mbs.superadmin)
 	@UseGuards(JwtAuthGuard, Role001mbsGuard)
-	@Get('findAll')
+	@Get('')
 	findAll(): Promise<Role001mb[]> {
-		console.log("Role001mb==>22", Role001mb);
 		return this.roleService.findAll();
+	}
+
+	// @hasRole(Role001mbs.superadmin, Role001mbs.admin, Role001mbs.user, Role001mbs.guest)
+	@UseGuards(JwtAuthGuard, Role001mbsGuard)
+	@Get(':Id')
+	findOne(@Param('roleId') roleId: number): Promise<Role001mb> {
+		return this.roleService.findOne(roleId);
 	}
 
 	// @hasRole(Role001mbs.superadmin)
 	@UseGuards(JwtAuthGuard, Role001mbsGuard)
-	@Delete('delete/:id')
+	@Delete(':id')
 	remove(@Param('id') id: number): Promise<void> {
 		return this.roleService.remove(id);
 	}

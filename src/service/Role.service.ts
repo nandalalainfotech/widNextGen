@@ -22,6 +22,9 @@ export class RoleService {
 	async findAll(): Promise<Role001mb[]> {
 		return this.roleRepository.find();
 	}
+	async findOne(roleId: number): Promise<Role001mb> {
+		return this.roleRepository.findOne(roleId);
+	}
 
 	async remove(id: number): Promise<void> {
 		await this.roleRepository.delete(id);

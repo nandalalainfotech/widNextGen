@@ -8,7 +8,7 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { map } from 'rxjs/operators';
 import { Users001mb } from 'src/entity/Users001mb';
-import { UsersDTO } from 'src/dto/Users.dto';
+import { UserDTO } from 'src/dto/User.dto';
 ;
 
 
@@ -28,7 +28,7 @@ export class AuthService {
 	async getUserAuthentication( password: string, username: string) {
 		console.log("username,password==>",password, username);
 		const users001mb: Users001mb = await this.usersRepository.findOne({ relations: [ 'role001mbs'], where: { username: username } });
-		let usersDTO = new UsersDTO();
+		let usersDTO = new UserDTO();
 
 		if (users001mb) {
 			const isMatch = await bcrypt.compare(password, users001mb.password);																																																							

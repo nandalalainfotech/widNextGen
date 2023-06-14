@@ -5,7 +5,8 @@ import { Users001mb } from "src/entity/Users001mb";
 
 
 
-export class UsersDTO  {
+export class UserDTO  {
+  
     userId: number;
 
     @ApiModelProperty({})
@@ -17,11 +18,17 @@ export class UsersDTO  {
     @ApiModelProperty({})
     username: string;
 
-    @ApiModelProperty({})
+    // @ApiModelProperty({})
     roleId: number;
 
-    @ApiModelProperty({})
-    groupid: number;
+    @ApiModelProperty({type : Number , isArray: true})
+    rolesId: number[];
+   
+    // @ApiModelProperty({})
+    groupId: number;
+
+    @ApiModelProperty({type : Number , isArray: true})
+    groupsId: number[];
 
     @ApiModelProperty({})
     password: string;
@@ -34,6 +41,9 @@ export class UsersDTO  {
 
     @ApiModelProperty({})
     mobileNo: string | null;
+
+    // @ApiModelProperty({})
+    // avatar: Buffer | null;
 
     @ApiModelProperty({})
     insertUser: string;
@@ -52,10 +62,11 @@ export class UsersDTO  {
         this.lastname = users001mb.lastname;
         this.username = users001mb.username;
         this.roleId = users001mb.roleId;
-        this.groupid = users001mb.groupid;
+        this.groupId = users001mb.groupId;
         this.password = users001mb.password;
         this.status = users001mb.status;
         this.email = users001mb.email;
+        // this.avatar = users001mb.avatar;
         this.insertUser = users001mb.insertUser;
         this.insertDatetime = users001mb.insertDatetime;
         this.updatedUser = users001mb.updatedUser;

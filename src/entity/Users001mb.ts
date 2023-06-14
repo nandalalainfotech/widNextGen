@@ -7,7 +7,7 @@ import {
 } from "typeorm";
 import { Group001mb } from "./Group001mb";
 import { Role001mb } from "./Role001mb";
-import { UsersDTO } from "src/dto/Users.dto";
+import { UserDTO } from "src/dto/User.dto";
 
 @Entity("users001mb", { schema: "wdinext" })
 export class Users001mb {
@@ -35,8 +35,11 @@ export class Users001mb {
   @Column("int", { name: "role_id", nullable: true })
   roleId: number | null;
 
-  @Column("int", { name: "groupid", unsigned: true })
-  groupid: number;
+  @Column("int", { name: "groupId", nullable: true })
+  groupId: number | null;
+
+  // @Column("blob", { name: "avatar", nullable: true })
+  // avatar: Buffer | null;
 
   @Column("varchar", { name: "insert_user", length: 40 })
   insertUser: string;
@@ -71,20 +74,21 @@ export class Users001mb {
   role001mbs: Role001mb[];
 
   
-  setProperties(usersDTO: UsersDTO) {
-    this.userId = usersDTO.userId;
-    this.firstname = usersDTO.firstname;
-    this.lastname = usersDTO.lastname;
-    this.username = usersDTO.username;
-    this.roleId = usersDTO.roleId;
-    this.groupid = usersDTO.groupid;
-    this.password = usersDTO.password;
-    this.status = usersDTO.status;
-    this.email = usersDTO.email;
-    this.insertUser = usersDTO.insertUser;
-    this.insertDatetime = usersDTO.insertDatetime;
-    this.updatedUser = usersDTO.updatedUser;
-    this.updatedDatetime = usersDTO.updatedDatetime;
+  setProperties(userDTO: UserDTO) {
+    this.userId = userDTO.userId;
+    this.firstname = userDTO.firstname;
+    this.lastname = userDTO.lastname;
+    this.username = userDTO.username;
+    this.roleId = userDTO.roleId;
+    this.groupId = userDTO.groupId;
+    this.password = userDTO.password;
+    this.status = userDTO.status;
+    this.email = userDTO.email;
+    // this.avatar = userDTO.avatar;
+    this.insertUser = userDTO.insertUser;
+    this.insertDatetime = userDTO.insertDatetime;
+    this.updatedUser = userDTO.updatedUser;
+    this.updatedDatetime = userDTO.updatedDatetime;
     
   }
 }

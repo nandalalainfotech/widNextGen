@@ -58,6 +58,10 @@ export class PermissionService {
         return this.permissionRepository.find({ relations: ["role001mbs"] });
     }
 
+    
+	async findOne(prmsnId: number): Promise<Permission001mb> {
+		return this.permissionRepository.findOne(prmsnId);
+	}
 
     async remove(id: number): Promise<void> {
         await this.permissionRepository.delete(id);
