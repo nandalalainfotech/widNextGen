@@ -1,59 +1,77 @@
 
 import { ApiModelProperty } from "@nestjs/swagger/dist/decorators/api-model-property.decorator";
 import { Role001mb } from "src/entity/Role001mb";
-import { User001mb } from "src/entity/User001mb";
+import { Users001mb } from "src/entity/Users001mb";
 
 
 
 export class UserDTO  {
-    personId: number;
-    @ApiModelProperty({})
-    unitslno: number;
-    @ApiModelProperty({})
-    dpslno: number;
+  
+    userId: number;
+
     @ApiModelProperty({})
     firstname: string;
+
     @ApiModelProperty({})
     lastname: string;
+
     @ApiModelProperty({})
     username: string;
-    @ApiModelProperty({})
-    roleid: number;
+
+    // @ApiModelProperty({})
+    roleId: number;
+
+    @ApiModelProperty({type : Number , isArray: true})
+    rolesId: number[];
+   
+    // @ApiModelProperty({})
+    groupId: number;
+
+    @ApiModelProperty({type : Number , isArray: true})
+    groupsId: number[];
+
     @ApiModelProperty({})
     password: string;
+
     @ApiModelProperty({})
     status: string;
+
     @ApiModelProperty({})
     email: string;
+
     @ApiModelProperty({})
     mobileNo: string | null;
+
+    // @ApiModelProperty({})
+    // avatar: Buffer | null;
+
+    @ApiModelProperty({})
     insertUser: string;
-    insertDatetime: Date;
+
+    @ApiModelProperty({})
+    insertDatetime: Date | null;
+    
     updatedUser: string | null;
     updatedDatetime: Date | null;
 
+    role001mbs?: Role001mb[];
 
-    role: Role001mb;
-  
-
-
-    setProperties(user001mb: User001mb) {
-        this.personId = user001mb.personId;
-        this.firstname = user001mb.firstname;
-        this.lastname = user001mb.lastname;
-        this.username = user001mb.username;
-        this.roleid = user001mb.roleid;
-        this.password = user001mb.password;
-        this.status = user001mb.status;
-        this.email = user001mb.email;
-        this.mobileNo = user001mb.mobileNo;
-        this.unitslno = user001mb.unitslno;
-        this.dpslno = user001mb.dpslno;
-        this.insertUser = user001mb.insertUser;
-        this.insertDatetime = user001mb.insertDatetime;
-        this.updatedUser = user001mb.updatedUser;
-        this.updatedDatetime = user001mb.updatedDatetime;
-        this.role = user001mb.role;
+    setProperties(users001mb: Users001mb) {
+        this.userId = users001mb.userId;
+        this.firstname = users001mb.firstname;
+        this.lastname = users001mb.lastname;
+        this.username = users001mb.username;
+        this.roleId = users001mb.roleId;
+        this.groupId = users001mb.groupId;
+        this.password = users001mb.password;
+        this.status = users001mb.status;
+        this.email = users001mb.email;
+        // this.avatar = users001mb.avatar;
+        this.insertUser = users001mb.insertUser;
+        this.insertDatetime = users001mb.insertDatetime;
+        this.updatedUser = users001mb.updatedUser;
+        this.updatedDatetime = users001mb.updatedDatetime;
+       
      
     }
 }

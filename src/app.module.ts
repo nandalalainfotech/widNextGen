@@ -4,11 +4,15 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { AuthModule } from './auth/auth.module';
 import { MailModule } from './mail/mail.module';
+import { GroupModule } from './module/group.module';
+import { PermissionModule } from './module/permission.module';
 import { RoleModule } from './module/role.module';
 import { UserModule } from './module/user.module';
 
 
+
 @Module({
+
     imports: [
         ConfigModule.forRoot({
             isGlobal: true,
@@ -38,8 +42,11 @@ import { UserModule } from './module/user.module';
         MailModule,
         RoleModule,
         UserModule,
+        GroupModule,
+        PermissionModule
         
-    ]
+    ],
+
 })
 
 export class AppModule { }
