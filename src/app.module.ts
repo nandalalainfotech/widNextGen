@@ -4,10 +4,9 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { AuthModule } from './auth/auth.module';
 import { MailModule } from './mail/mail.module';
-import { GroupModule } from './module/group.module';
-import { PermissionModule } from './module/permission.module';
-import { RoleModule } from './module/role.module';
-import { UserModule } from './module/user.module';
+import { RnPermissionsModule } from './module/rn_permissions.module';
+import { RnRolesModule } from './module/rn_roles.module';
+import { RnUsersModule } from './module/rn_users.module';
 
 
 
@@ -40,10 +39,9 @@ import { UserModule } from './module/user.module';
         }),
         AuthModule,
         MailModule,
-        RoleModule,
-        UserModule,
-        GroupModule,
-        PermissionModule
+        RnRolesModule,
+        RnPermissionsModule,
+       RnUsersModule
         
     ],
 
