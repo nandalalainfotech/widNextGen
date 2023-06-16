@@ -7,14 +7,16 @@ import { from, Observable } from 'rxjs';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { map } from 'rxjs/operators';
-import { User001mb } from 'src/entity/User001mb';
-import { UserDTO } from 'src/dto/User.dto';
+import { RnUsers } from 'src/entity/rn_users';
+import { RnUsersDTO } from 'src/dto/rn_users.dto';
+
+;
 
 
 @Injectable()
 export class AuthService {
 
-	constructor(@InjectRepository(User001mb) private readonly userRepository: Repository<User001mb>,
+	constructor(@InjectRepository(RnUsers) private readonly rnUsersRepository: Repository<RnUsers>,
 		private readonly jwtService: JwtService) { }
 
 	generateJwt(username, status, role): Observable<string> {
@@ -25,39 +27,18 @@ export class AuthService {
 	}
 
 	async getUserAuthentication( password: string, username: string) {
-		// console.log("username,password", username,password);
-		const user001mb: User001mb = await this.userRepository.findOne({ relations: [ 'role'], where: { username: username } });
-		let userDTO = new UserDTO();
+		console.log("username,password==>",password, username);
+		const rnUsers: RnUsers = await this.rnUsersRepository.findOne({ relations: [ 'role'], where: { username: username } });
+		let rnUsersDTO = new RnUsersDTO();
 
-		if (user001mb) {
-			const isMatch = await bcrypt.compare(username, user001mb.username);
-
-			// .addSecurityDefination("Bearer", new OpenApiSecurityScheme{
+		if (rnUsersDTO) {
+			const isMatch = await bcrypt.compare(password, rnUsers.password);																																																							
+			 if (rnUsers) {
+				rnUsersDTO.setProperties(rnUsers);
+				rnUsersDTO.password = null;
 				
-			// 	Description = "please insert token",
-			// 	Name = "Authoraization",
-			// 	Type = securityType.Http,
-			// 	Bearerformat = "JWT",
-			// 	Scheme = "Bearer"
-		  
-			//   });
-			//   .addSecurityRequirement {
-			// 	{
-			// 	  new OpenApiSecurityScheme{
-			// 		Reference = new OpenApiReference {
-			// 		  type = ReferenceType. SecurityScheme, 
-			// 		  Id = "Bearer"
-			// 		}
-			// 	  },
-			// 	  new string[] {}
-			// 	}
-			//   }																																																								
-			 if (user001mb) {
-				userDTO.setProperties(user001mb);
-				userDTO.password = null;
-				
-				return this.generateJwt(user001mb.username, user001mb.status, user001mb.role.rolename).pipe(map((jwt: string) => {
-					return { userDTO, access_token: jwt };
+				return this.generateJwt(rnUsers.username, rnUsers.status, rnUsers.role).pipe(map((jwt: string) => {
+					return { rnUsersDTO, access_token: jwt };
 				})
 				)
 			} 
