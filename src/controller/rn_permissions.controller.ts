@@ -17,13 +17,13 @@ export class RnPermissionsController {
 	constructor(private readonly rnPermissionService: RnPermissionsService) { }
 
 	@UseGuards(JwtAuthGuard)
-	// @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
 	@Get("/:roleId")
 	findAll(): Promise<RnPermissions[]> {
 		return this.rnRolesService.findAll();
 	}
 	@UseGuards(JwtAuthGuard)
-	// @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
 	@Put("/:roleId")
 	update(@Body() rnPermissionsDTO: RnPermissionsDTO): Promise<RnPermissions> {
 		return this.rnPermissionService.update(rnPermissionsDTO);

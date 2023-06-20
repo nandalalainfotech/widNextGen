@@ -22,13 +22,13 @@ export class RnPermissionsService {
 
 	async update(rnPermissionsDTO: RnPermissionsDTO): Promise<RnPermissions> {
 		const rnPermissions = new RnPermissions();
-		rnPermissions.permissionname = rnPermissionsDTO.permissionname;
+		rnPermissions.controller = rnPermissionsDTO.controller;
 		rnPermissions.updatedUser = rnPermissionsDTO.updatedUser;
 		rnPermissions.updatedDatetime = rnPermissionsDTO.updatedDatetime;
 		rnPermissions.updatedUser = rnPermissionsDTO.updatedUser;
 		rnPermissions.updatedDatetime = rnPermissionsDTO.updatedDatetime;
 
-		await this.rnPermissionsRepository.update({ prmsnId: rnPermissionsDTO.prmsnId }, rnPermissions);
+		await this.rnPermissionsRepository.update({ id: rnPermissionsDTO.id }, rnPermissions);
 		return rnPermissions;
 
 	}

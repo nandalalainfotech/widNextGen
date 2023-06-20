@@ -2,6 +2,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { RnRolesDTO } from "src/dto/rn_roles.dto";
 import { RnUsers } from "./rn_users";
 import { RnPermissions } from "./rn_permissions";
+import { RnLanguages } from "./rn_languages";
 
 @Entity("rn_roles", { schema: "wdinext" })
 export class RnRoles {
@@ -28,6 +29,9 @@ export class RnRoles {
 
   @OneToMany(() => RnUsers, (rnUsers) => rnUsers.role)
   rnUsers: RnUsers[];
+
+  @OneToMany(() => RnLanguages, (rnLanguages) => rnLanguages.role)
+  rnLanguages: RnLanguages[];
 
   setProperties(rnRolesDTO: RnRolesDTO) {
     this.roleId = rnRolesDTO.roleId;

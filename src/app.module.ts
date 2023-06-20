@@ -4,15 +4,33 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { AuthModule } from './auth/auth.module';
 import { MailModule } from './mail/mail.module';
+import { RnLanguagesModule } from './module/rn_languages.module';
 import { RnPermissionsModule } from './module/rn_permissions.module';
 import { RnRolesModule } from './module/rn_roles.module';
 import { RnUsersModule } from './module/rn_users.module';
+
+import { I18nModule } from 'nestjs-i18n/dist/i18n.module';
+const path = require('path');
+
+
 
 
 
 @Module({
 
     imports: [
+        // I18nModule.forRoot({
+        //     fallbackLanguage: 'en',
+        //     loaderOptions: {
+        //         path: path.join(__dirname, '/rn_i18n/'),
+        //         watch: true,
+        //     },
+        // }),
+        //   resolvers: [
+        //     { use: QueryResolver, options: ['lang'] },
+        //     AcceptLanguageResolver,
+        //   ],
+
         ConfigModule.forRoot({
             isGlobal: true,
             expandVariables: true,
@@ -36,13 +54,16 @@ import { RnUsersModule } from './module/rn_users.module';
                 migrations: ['../dist/entity/*.entity.{ts,js}'],
                 namingStrategy: new SnakeNamingStrategy(),
             } as TypeOrmModuleOptions),
+
         }),
         AuthModule,
         MailModule,
         RnRolesModule,
         RnPermissionsModule,
-       RnUsersModule
-        
+        RnUsersModule,
+        RnLanguagesModule,
+
+
     ],
 
 })

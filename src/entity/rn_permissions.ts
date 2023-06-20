@@ -1,4 +1,3 @@
-import { RnPermissionsDTO } from "src/dto/rn_permissions.dto";
 import {
   Column,
   Entity,
@@ -8,16 +7,23 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { RnRoles } from "./rn_roles";
+import { RnPermissionsDTO } from "src/dto/rn_permissions.dto";
 
 
 @Index("role_id", ["roleId"], {})
 @Entity("rn_permissions", { schema: "wdinext" })
 export class RnPermissions {
-  @PrimaryGeneratedColumn({ type: "int", name: "prmsn_id" })
-  prmsnId: number;
+  @PrimaryGeneratedColumn({ type: "int", name: "id" })
+  id: number;
 
-  @Column("varchar", { name: "permissionname", length: 40 })
-  permissionname: string;
+  @Column("varchar", { name: "controller", length: 40 })
+  controller: string;
+
+  @Column("varchar", { name: "get", length: 40 })
+  get: string;
+
+  @Column("varchar", { name: "put", length: 40 })
+  put: string;
 
   @Column("int", { name: "role_id" })
   roleId: number;
@@ -26,7 +32,7 @@ export class RnPermissions {
   insertUser: string;
 
   @Column("datetime", { name: "insert_datetime" })
-  insertDatetime: Date | null;
+  insertDatetime: Date;
 
   @Column("varchar", { name: "updated_user", nullable: true, length: 40 })
   updatedUser: string | null;
@@ -42,10 +48,14 @@ export class RnPermissions {
   role: RnRoles;
     
   setProperties(rnPermissionsDTO: RnPermissionsDTO) {
-    this.prmsnId = rnPermissionsDTO.prmsnId;
-    this.permissionname = rnPermissionsDTO.permissionname;
+    this.id = rnPermissionsDTO.id;
+    this.controller = rnPermissionsDTO.controller;
+    this.get = rnPermissionsDTO.get;
+    this.put = rnPermissionsDTO.put;
     this.roleId = rnPermissionsDTO.roleId;
     this.insertUser = rnPermissionsDTO.insertUser;
     this.insertDatetime = rnPermissionsDTO.insertDatetime;
+    this.updatedUser = rnPermissionsDTO.updatedUser;
+    this.updatedDatetime = rnPermissionsDTO.updatedDatetime;
   }
 }
