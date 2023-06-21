@@ -25,9 +25,6 @@ export class RnPermissionsService {
 		rnPermissions.controller = rnPermissionsDTO.controller;
 		rnPermissions.updatedUser = rnPermissionsDTO.updatedUser;
 		rnPermissions.updatedDatetime = rnPermissionsDTO.updatedDatetime;
-		rnPermissions.updatedUser = rnPermissionsDTO.updatedUser;
-		rnPermissions.updatedDatetime = rnPermissionsDTO.updatedDatetime;
-
 		await this.rnPermissionsRepository.update({ id: rnPermissionsDTO.id }, rnPermissions);
 		return rnPermissions;
 

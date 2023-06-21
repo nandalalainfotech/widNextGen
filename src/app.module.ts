@@ -10,6 +10,10 @@ import { RnRolesModule } from './module/rn_roles.module';
 import { RnUsersModule } from './module/rn_users.module';
 
 import { I18nModule } from 'nestjs-i18n/dist/i18n.module';
+import { RnPagesModule } from './module/rn_pages.module';
+import { RnPageTranslationsModule } from './module/rn_page_translations.module';
+import { RnCurrenciesModule } from './module/rn_currencies.module';
+import { RnCurrencyTranslationsModule } from './module/rn_currency_translations.module';
 const path = require('path');
 
 
@@ -30,6 +34,22 @@ const path = require('path');
         //     { use: QueryResolver, options: ['lang'] },
         //     AcceptLanguageResolver,
         //   ],
+
+        // I18nModule.forRootAsync({
+        //     useFactory: (configService: ApiConfigService) => ({
+        //         fallbackLanguage: 'en',
+        //       loaderOptions: {
+        //         path: path.join(__dirname, '/i18n/'),
+        //         watch: true,
+        //       },
+        //     }),
+
+        //     resolvers: [
+        //              { use: QueryResolver, options: ['lang'] },
+        //              AcceptLanguageResolver,
+        //            ],
+        //     // inject: [ApiConfigService],
+        //   }),
 
         ConfigModule.forRoot({
             isGlobal: true,
@@ -62,9 +82,17 @@ const path = require('path');
         RnPermissionsModule,
         RnUsersModule,
         RnLanguagesModule,
+        RnPagesModule,
+        RnPageTranslationsModule,
+        RnCurrenciesModule,
+        RnCurrencyTranslationsModule
+        // I18nModule
 
 
     ],
+
+    // controllers: [AppController],
+    // providers: [AppService]
 
 })
 

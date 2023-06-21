@@ -14,7 +14,8 @@ export class RnUsersService {
 	saltRounds = 10;
 	users001mb: any;
 
-	constructor(private mailService: MailService,
+	constructor(
+		// private mailService: MailService,
 		@InjectRepository(RnUsers) private readonly rnUsersRepository: Repository<RnUsers>) { }
 
 

@@ -12,5 +12,6 @@ import { RnRolesService } from 'src/service/rn_roles.service';
   imports: [TypeOrmModule.forFeature([RnPermissions, RnRoles])],
   providers: [RnPermissionsService,RnRolesService],
   controllers: [RnPermissionsController],
+  exports: [RnPermissionsService]
 })
 export class RnPermissionsModule { }
