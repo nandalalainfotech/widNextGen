@@ -7,37 +7,38 @@ import { from, Observable } from 'rxjs';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { map } from 'rxjs/operators';
-import { Users001mb } from 'src/entity/Users001mb';
-import { UserDTO } from 'src/dto/User.dto';
+import { RnUsers } from 'src/entity/rn_users';
+import { RnUsersDTO } from 'src/dto/rn_users.dto';
+
 ;
 
 
 @Injectable()
 export class AuthService {
 
-	constructor(@InjectRepository(Users001mb) private readonly usersRepository: Repository<Users001mb>,
+	constructor(@InjectRepository(RnUsers) private readonly rnUsersRepository: Repository<RnUsers>,
 		private readonly jwtService: JwtService) { }
 
-	generateJwt(username, status, role001mbs): Observable<string> {
+	generateJwt(username, status, role): Observable<string> {
 		const payload = {
-			username: username, status: status, role: role001mbs
+			username: username, status: status, role: role
 		};
 		return from(this.jwtService.signAsync(payload));
 	}
 
 	async getUserAuthentication( password: string, username: string) {
 		console.log("username,password==>",password, username);
-		const users001mb: Users001mb = await this.usersRepository.findOne({ relations: [ 'role001mbs'], where: { username: username } });
-		let usersDTO = new UserDTO();
+		const rnUsers: RnUsers = await this.rnUsersRepository.findOne({ relations: [ 'role'], where: { username: username } });
+		let rnUsersDTO = new RnUsersDTO();
 
-		if (users001mb) {
-			const isMatch = await bcrypt.compare(password, users001mb.password);																																																							
-			 if (users001mb) {
-				usersDTO.setProperties(users001mb);
-				usersDTO.password = null;
+		if (rnUsersDTO) {
+			const isMatch = await bcrypt.compare(password, rnUsers.password);																																																							
+			 if (rnUsers) {
+				rnUsersDTO.setProperties(rnUsers);
+				rnUsersDTO.password = null;
 				
-				return this.generateJwt(users001mb.username, users001mb.status, users001mb.role001mbs).pipe(map((jwt: string) => {
-					return { usersDTO, access_token: jwt };
+				return this.generateJwt(rnUsers.username, rnUsers.status, rnUsers.role).pipe(map((jwt: string) => {
+					return { rnUsersDTO, access_token: jwt };
 				})
 				)
 			} 

@@ -3,27 +3,27 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthController } from 'src/controller/auth.controller';
-import { Role001mb } from 'src/entity/Role001mb';
-import { Users001mb } from 'src/entity/Users001mb';
+import { RnRoles } from 'src/entity/rn_roles';
+import { RnUsers } from 'src/entity/rn_users';
+import { RolesGuard } from 'src/roles/role.guard';
 import { JwtStrategy } from './jwt.strategy';
 import { AuthService } from './services/auth.service';
-import { Role001mbsGuard } from 'src/role001mbs/role001mbs.guard';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([Users001mb, Role001mb]),
+        TypeOrmModule.forFeature([RnRoles, RnUsers]),
         JwtModule.registerAsync({
             imports: [ConfigModule], // Missing this
             useFactory: async (configService: ConfigService) => ({
                 secret: configService.get('JWT_SECRET'),
-                signOptions: { expiresIn: '5000s' }
+                signOptions: { expiresIn: '10000s' }
             }),
             inject: [ConfigService],
         }),
     ],
-    providers: [AuthService, JwtStrategy,Role001mbsGuard, Role001mbsGuard],
+    providers: [AuthService, JwtStrategy,RolesGuard, RolesGuard],
     controllers: [AuthController],
-    exports: [AuthService,Role001mbsGuard, Role001mbsGuard]
+    exports: [AuthService,RolesGuard, RolesGuard]
 })
 
 export class AuthModule { }
