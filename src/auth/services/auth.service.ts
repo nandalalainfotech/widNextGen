@@ -7,7 +7,7 @@ import { from, Observable } from 'rxjs';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { map } from 'rxjs/operators';
-import { RnUsers } from 'src/entity/rn_users';
+import { RnUsers } from 'src/entity/rn_users.entity';
 import { RnUsersDTO } from 'src/dto/rn_users.dto';
 
 ;

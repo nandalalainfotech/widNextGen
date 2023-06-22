@@ -1,7 +1,7 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { RnUsers } from 'src/entity/rn_users';
+import { RnUsers } from 'src/entity/rn_users.entity';
 
 
 

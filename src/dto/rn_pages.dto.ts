@@ -1,6 +1,6 @@
 import { ApiModelProperty } from "@nestjs/swagger/dist/decorators/api-model-property.decorator";
 import { BaseDTO } from "./Base.dto";
-import { RnPages } from "src/entity/rn_pages";
+import { RnPages } from "src/entity/rn_pages.entity";
 
 export class RnPagesDTO extends BaseDTO {
     @ApiModelProperty({})

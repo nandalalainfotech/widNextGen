@@ -1,14 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Req, Res, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger/dist/decorators/api-bearer.decorator';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RnUsers } from 'src/entity/rn_users';
 import { RnUsersDTO } from 'src/dto/rn_users.dto';
-import { RolesGuard } from 'src/roles/role.guard';
-import { RnUsersService } from 'src/service/rn_users.service';
+import { RnUsers } from 'src/entity/rn_users.entity';
 import { hasRole } from 'src/roles/role.decorator';
 import { Role } from 'src/roles/role.enum';
-import { createReadStream } from 'fs';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { RolesGuard } from 'src/roles/role.guard';
+import { RnUsersService } from 'src/service/rn_users.service';
 var path = require('path');
 const fs = require('fs')
 
@@ -21,8 +19,8 @@ export class RnUsersController {
 	@UseGuards(JwtAuthGuard, RolesGuard)
 	@hasRole(Role.superadmin)
 	@Post("")
-	@UseInterceptors(FileInterceptor('file'))
 	create(@Body() rnUsersDTO: RnUsersDTO): Promise<RnUsers> {
+
 		return this.rnUsersService.create(rnUsersDTO);
 	}
 

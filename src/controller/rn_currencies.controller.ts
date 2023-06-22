@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nes
 import { ApiBearerAuth } from '@nestjs/swagger/dist/decorators/api-bearer.decorator';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RnCurrenciesDTO } from 'src/dto/rn_currencies.dto';
-import { RnCurrencies } from 'src/entity/rn_currencies';
+import { RnCurrencies } from 'src/entity/rn_currencies.entity';
 import { hasRole } from 'src/roles/role.decorator';
 import { Role } from 'src/roles/role.enum';
 import { RolesGuard } from 'src/roles/role.guard';

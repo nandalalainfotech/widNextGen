@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RnLanguagesDTO } from 'src/dto/rn_languages.dto';
-import { RnLanguages } from 'src/entity/rn_languages';
+import { RnLanguages } from 'src/entity/rn_languages.entity';
 import { MailService } from 'src/mail/mail.service';
 import { Repository } from 'typeorm';
 

@@ -1,5 +1,5 @@
 
-import { RnRoles } from "src/entity/rn_roles";
+import { RnRoles } from "src/entity/rn_roles.entity";
 import { BaseDTO } from "./Base.dto";
 import { ApiModelProperty } from "@nestjs/swagger";
 

@@ -6,8 +6,8 @@ import {
     ManyToOne,
     PrimaryGeneratedColumn,
   } from "typeorm";
-import { RnCurrencyTranslationsDTO } from "src/dto/rn_currency_translations.dto";
-import { RnRoles } from "./rn_roles";
+import { RnCurrencyTranslationsDTO } from "src/dto/rn_reviewcurrency_translations.dto";
+import { RnRoles } from "./rn_roles.entity";
   
   @Index("role_id", ["roleId"], {})
   @Entity("rn_currency_translations", { schema: "wdinext" })

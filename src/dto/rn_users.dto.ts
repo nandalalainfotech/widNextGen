@@ -1,6 +1,6 @@
 
 import { ApiModelProperty } from "@nestjs/swagger/dist/decorators/api-model-property.decorator";
-import { RnUsers } from "src/entity/rn_users";
+import { RnUsers } from "src/entity/rn_users.entity";
 
 
 
@@ -33,8 +33,8 @@ export class RnUsersDTO  {
     @ApiModelProperty({})
     mobileNo: string | null;
 
-    // @ApiModelProperty({})
-    // avatar: Buffer | null;
+    @ApiModelProperty({})
+    avatar: string | null;
 
     @ApiModelProperty({})
     insertUser: string;
@@ -56,7 +56,7 @@ export class RnUsersDTO  {
         this.status = rnUsers.status;
         this.email = rnUsers.email;
         this.mobileNo = rnUsers.mobileNo;
-        // this.avatar = rnUsers.avatar;
+        this.avatar = rnUsers.avatar;
         this.insertUser = rnUsers.insertUser;
         this.insertDatetime = rnUsers.insertDatetime;
         this.updatedUser = rnUsers.updatedUser;

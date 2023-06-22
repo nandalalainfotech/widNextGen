@@ -1,31 +1,31 @@
-// import { Injectable } from '@nestjs/common';
-// import { ConfigService } from '@nestjs/config';
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
-// @Injectable()
-// export class ApiConfigService {
-//   constructor(private configService: ConfigService) {}
+@Injectable()
+export class ApiConfigService {
+  constructor(private configService: ConfigService) {}
 
-//   private getString(key: string): string {
-//     const value = this.get(key);
+  private getString(key: string): string {
+    const value = this.get(key);
 
-//     return value.replace(/\\n/g, '\n');
+    return value.replace(/\\n/g, '\n');
+  }
+
+//   get fallbackLanguage(): string {
+//     return this.getString('FALLBACK_LANGUAGE').toLowerCase();
 //   }
 
-// //   get fallbackLanguage(): string {
-// //     return this.getString('FALLBACK_LANGUAGE').toLowerCase();
-// //   }
-
-// //   get isDevelopment(): boolean {
-// //     return this.nodeEnv === 'development';
-// //   }
-
-//   get nodeEnv(): string {
-//     return this.getString('NODE_ENV');
+//   get isDevelopment(): boolean {
+//     return this.nodeEnv === 'development';
 //   }
 
-//   private get(key: string): string {
-//     const value = this.configService.get<string>(key);
+  get nodeEnv(): string {
+    return this.getString('NODE_ENV');
+  }
 
-//     return value;
-//   }
-// }
+  private get(key: string): string {
+    const value = this.configService.get<string>(key);
+
+    return value;
+  }
+}

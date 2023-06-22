@@ -6,7 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { RnRoles } from "./rn_roles";
+import { RnRoles } from "./rn_roles.entity";
 import { RnUsersDTO } from "src/dto/rn_users.dto";
 
 @Index("role_id", ["roleId"], {})
@@ -39,8 +39,12 @@ export class RnUsers {
   @Column("varchar", { name: "mobile_no", nullable: true, length: 15 })
   mobileNo: string | null;
 
-  // @Column("blob", { name: "avatar", nullable: true })
-  // avatar: Buffer | null;
+  @Column("varchar", {
+    name: "avatar",
+    length: 255,
+    default: () => "'default_avatar.jpg'",
+  })
+  avatar: string;
 
   @Column("varchar", { name: "insert_user", length: 40 })
   insertUser: string;
@@ -73,7 +77,7 @@ export class RnUsers {
     this.status = rnUsersDTO.status;
     this.email = rnUsersDTO.email;
     this.mobileNo = rnUsersDTO.mobileNo;
-    // this.avatar = rnUsersDTO.avatar;
+    this.avatar = rnUsersDTO.avatar;
     this.insertUser = rnUsersDTO.insertUser;
     this.insertDatetime = rnUsersDTO.insertDatetime;
     this.updatedUser = rnUsersDTO.updatedUser;

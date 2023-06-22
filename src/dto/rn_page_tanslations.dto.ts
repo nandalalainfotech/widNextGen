@@ -1,7 +1,7 @@
 import { ApiModelProperty } from "@nestjs/swagger/dist/decorators/api-model-property.decorator";
 import { BaseDTO } from "./Base.dto";
-import { RnPages } from "src/entity/rn_pages";
-import { RnPageTranslations } from "src/entity/rn_page_translations";
+import { RnPages } from "src/entity/rn_pages.entity";
+import { RnPageTranslations } from "src/entity/rn_page_translations.entity";
 
 export class RnPageTranslationsDTO extends BaseDTO {
     @ApiModelProperty({})

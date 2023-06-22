@@ -2,7 +2,7 @@ import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Observable } from "rxjs";
-import { RnUsers } from "src/entity/rn_users";
+import { RnUsers } from "src/entity/rn_users.entity";
 import { Repository } from "typeorm";
 import { ROLES_KEY } from "./role.decorator";
 import { Role } from "./role.enum";
@@ -17,7 +17,6 @@ export class RolesGuard implements CanActivate {
 
 
     canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
-      console.log("Role====000",Role);
         const roles = this.reflector.getAllAndOverride<Role[]>(ROLES_KEY, [
             context.getHandler(),
             context.getClass()
@@ -29,9 +28,7 @@ export class RolesGuard implements CanActivate {
   
         
         if (user && user.user && user.user.username) {
-          console.log("user =====>02", user );
             return this.rnUserRepository.find({ relations: ['role'],  where: { username: user.user.username, } }).then((users: RnUsers[]) => {
-              console.log("users =====>03", users ); 
               let rnUsers: RnUsers = users[0];
               const rolePermissions = {
                 superadmin: {
@@ -91,7 +88,7 @@ export class RolesGuard implements CanActivate {
                    }
                   }
                 }
-              console.log("hasRole====01",  roles.indexOf(Role[rnUsers.role.rolename]));
+            
                 const hasRole = () => roles.indexOf(Role[rnUsers.role.rolename]) > -1;
                 let hasPermission: boolean = false;
 
