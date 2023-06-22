@@ -7,7 +7,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { RnRoles } from "./rn_roles";
+import { RnRoles } from "./rn_roles.entity";
 
 @Index("role_id", ["roleId"], {})
 @Entity("rn_languages", { schema: "wdinext" })

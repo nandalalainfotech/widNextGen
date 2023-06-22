@@ -1,5 +1,5 @@
 import { ApiModelProperty } from "@nestjs/swagger";
-import { RnPermissions } from "src/entity/rn_permissions";
+import { RnPermissions } from "src/entity/rn_permissions.entity";
 import { BaseDTO } from "./Base.dto";
 
 export class RnPermissionsDTO extends BaseDTO {

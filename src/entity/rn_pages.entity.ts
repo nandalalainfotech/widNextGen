@@ -6,7 +6,7 @@ import {
     ManyToOne,
     PrimaryGeneratedColumn,
   } from "typeorm";
-import { RnRoles } from "./rn_roles";
+import { RnRoles } from "./rn_roles.entity";
 import { RnPagesDTO } from "src/dto/rn_pages.dto";
 
   

@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RnCurrenciesDTO } from 'src/dto/rn_currencies.dto';
 import { RnPagesDTO } from 'src/dto/rn_pages.dto';
-import { RnCurrencies } from 'src/entity/rn_currencies';
+import { RnCurrencies } from 'src/entity/rn_currencies.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()

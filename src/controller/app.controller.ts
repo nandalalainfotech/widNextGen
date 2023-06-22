@@ -1,18 +1,18 @@
-// import { Get, Controller, Render } from '@nestjs/common';
-// import { AppService } from 'src/service/app.service';
+import { Get, Controller, Render } from '@nestjs/common';
+import { AppService } from 'src/service/app.service';
 
 
-// @Controller()
-// export class AppController {
-//   constructor(private readonly appService: AppService) {}
+@Controller()
+export class AppController {
+  constructor(private readonly appService: AppService) {}
 
-//   @Get()
-//   @Render('index')
-//   async render() {
-//     const message = await this.appService.getHello();
-//     return { message };
-//   }
-// }
+  @Get()
+  @Render('index')
+  async render() {
+    const message = await this.appService.getHello();
+    return { message };
+  }
+}
 
 
 // import { Controller, Get } from '@nestjs/common';

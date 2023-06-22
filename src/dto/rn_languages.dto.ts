@@ -1,5 +1,5 @@
 import { ApiModelProperty } from "@nestjs/swagger";
-import { RnLanguages } from "src/entity/rn_languages";
+import { RnLanguages } from "src/entity/rn_languages.entity";
 import { BaseDTO } from "./Base.dto";
 
 export class RnLanguagesDTO extends BaseDTO {

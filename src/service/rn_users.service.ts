@@ -2,10 +2,9 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { RnUsersDTO } from 'src/dto/rn_users.dto';
-import { RnRoles } from 'src/entity/rn_roles';
-import { RnUsers } from 'src/entity/rn_users';
-import { MailService } from 'src/mail/mail.service';
-import { In, Repository } from 'typeorm';
+import { RnRoles } from 'src/entity/rn_roles.entity';
+import { RnUsers } from 'src/entity/rn_users.entity';
+import { Repository } from 'typeorm';
 
 
 @Injectable()
@@ -13,6 +12,7 @@ export class RnUsersService {
 
 	saltRounds = 10;
 	users001mb: any;
+	roleRepository: any;
 
 	constructor(
 		// private mailService: MailService,
@@ -20,28 +20,36 @@ export class RnUsersService {
 
 
 	async create(rnUsersDTO: RnUsersDTO): Promise<RnUsers> {
+		console.log("userDTO===============>12", rnUsersDTO);
 		let rnUser: RnUsers[] = [];
 		rnUser = await this.rnUsersRepository.find({ relations: ["role"] });
+		console.log("userDTO===============>13", rnUsersDTO);
+	
 		for (let i = 0; i < rnUser.length; i++) {
 			if (rnUsersDTO.username.toLowerCase() == rnUser[i].username.toLowerCase()) {
-				throw new HttpException('User Name Already Exist', HttpStatus.INTERNAL_SERVER_ERROR);
+				throw new HttpException('type Already Exist', HttpStatus.INTERNAL_SERVER_ERROR);
 			}
+
 			if (rnUsersDTO.email.toLowerCase() == rnUser[i].email.toLowerCase()) {
-				throw new HttpException('Email Address Already Exist', HttpStatus.INTERNAL_SERVER_ERROR);
+				throw new HttpException('username Already Exist', HttpStatus.INTERNAL_SERVER_ERROR);
 			}
-			if (rnUsersDTO.mobileNo.toLowerCase() == rnUser[i].mobileNo.toLowerCase()) {
-				throw new HttpException('Mobile Number Already Exist', HttpStatus.INTERNAL_SERVER_ERROR);
-			}
+
+			// if (rnUsersDTO.mobileNo.toLowerCase() == rnUser[i].mobileNo.toLowerCase()) {
+			// 	throw new HttpException('mobileNo Already Exist', HttpStatus.INTERNAL_SERVER_ERROR);
+			// }
 		}
-		console.log("userDTO===============>13", rnUsersDTO);
+		 console.log("userDTO===============>14", rnUsersDTO);
+
+		//  let role = await this.roleRepository.findOne({ where: { roleId: rnUsersDTO.roleId } });
+		
 
 		const rnUsers = new RnUsers();
 		rnUsers.setProperties(rnUsersDTO);
-		console.log("rnUser===============>14", rnUsers);
+		// console.log("rnUser===============>14", rnUsers);
 		rnUsers.password = "wdinext001";
 		const hash = await bcrypt.hash(rnUsers.password, this.saltRounds);
 		rnUsers.password = hash;
-		console.log("rnUser===============>15", rnUsers);
+		// console.log("rnUser===============>15", rnUsers);
 		await this.rnUsersRepository.save(rnUsers);
 		rnUsers.password = "";
 		// rnUsers.originalfilename = file.filename;

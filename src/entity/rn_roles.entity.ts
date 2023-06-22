@@ -1,12 +1,14 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { RnUsers } from "./rn_users";
-import { RnPermissions } from "./rn_permissions";
-import { RnPages } from "./rn_pages";
-import { RnPageTranslations } from "./rn_page_translations";
-import { RnLanguages } from "./rn_languages";
+import { RnUsers } from "./rn_users.entity";
+import { RnPermissions } from "./rn_permissions.entity";
+import { RnPages } from "./rn_pages.entity";
+import { RnPageTranslations } from "./rn_page_translations.entity";
+import { RnLanguages } from "./rn_languages.entity";
+import { RnCurrencyTranslations } from "./rn_currency_translations.entity";
+import { RnCurrencies } from "./rn_currencies.entity";
+import { RnCategories } from "./rn_reviewcategories.entity";
 import { RnRolesDTO } from "src/dto/rn_roles.dto";
-import { RnCurrencies } from "./rn_currencies";
-import { RnCurrencyTranslations } from "./rn_currency_translations";
+import { RnCategoryTranslations } from "./rn_reviewcategory_translations.entity";
 
 
 @Entity("rn_roles", { schema: "wdinext" })
@@ -30,13 +32,22 @@ export class RnRoles {
   insertDatetime: Date | null;
 
   @OneToMany(
+    () => RnCategoryTranslations,
+    (rnCategoryTranslations) => rnCategoryTranslations.role
+  )
+  rnCategoryTranslations: RnCategoryTranslations[];
+
+  @OneToMany(() => RnCategories, (rnCategories) => rnCategories.role)
+  rnCategories: RnCategories[];
+
+  @OneToMany(() => RnCurrencies, (rnCurrencies) => rnCurrencies.role)
+  rnCurrencies: RnCurrencies[];
+
+  @OneToMany(
     () => RnCurrencyTranslations,
     (rnCurrencyTranslations) => rnCurrencyTranslations.role
   )
   rnCurrencyTranslations: RnCurrencyTranslations[];
-
-  @OneToMany(() => RnCurrencies, (rnCurrencies) => rnCurrencies.role)
-  rnCurrencies: RnCurrencies[];
 
   @OneToMany(() => RnLanguages, (rnLanguages) => rnLanguages.role)
   rnLanguages: RnLanguages[];
@@ -55,6 +66,8 @@ export class RnRoles {
 
   @OneToMany(() => RnUsers, (rnUsers) => rnUsers.role)
   rnUsers: RnUsers[];
+
+
 
   setProperties(rnRolesDTO: RnRolesDTO) {
     this.roleId = rnRolesDTO.roleId;

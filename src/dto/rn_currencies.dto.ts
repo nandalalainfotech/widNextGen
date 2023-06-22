@@ -1,7 +1,7 @@
 import { ApiModelProperty } from "@nestjs/swagger";
-import { RnLanguages } from "src/entity/rn_languages";
+import { RnLanguages } from "src/entity/rn_languages.entity";
 import { BaseDTO } from "./Base.dto";
-import { RnCurrencies } from "src/entity/rn_currencies";
+import { RnCurrencies } from "src/entity/rn_currencies.entity";
 
 export class RnCurrenciesDTO extends BaseDTO {
     @ApiModelProperty({})

@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RnPermissionsDTO } from 'src/dto/rn_permissions.dto';
-import { RnPermissions } from 'src/entity/rn_permissions';
+import { RnPermissions } from 'src/entity/rn_permissions.entity';
 import { MailService } from 'src/mail/mail.service';
 import { Repository } from 'typeorm';
 

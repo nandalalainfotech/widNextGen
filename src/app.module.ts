@@ -14,6 +14,12 @@ import { RnPagesModule } from './module/rn_pages.module';
 import { RnPageTranslationsModule } from './module/rn_page_translations.module';
 import { RnCurrenciesModule } from './module/rn_currencies.module';
 import { RnCurrencyTranslationsModule } from './module/rn_currency_translations.module';
+import { RnCategoriesModule } from './module/rn_reviewcategories.module';
+import { RnCategoryTranslationsModule } from './module/rn_reviewcatogory_translations.module';
+import { AcceptLanguageResolver, QueryResolver } from 'nestjs-i18n';
+import { ApiConfigService } from './shared/api.service';
+import { AppController } from './controller/app.controller';
+import { AppService } from './service/app.service';
 const path = require('path');
 
 
@@ -35,21 +41,21 @@ const path = require('path');
         //     AcceptLanguageResolver,
         //   ],
 
-        // I18nModule.forRootAsync({
-        //     useFactory: (configService: ApiConfigService) => ({
-        //         fallbackLanguage: 'en',
-        //       loaderOptions: {
-        //         path: path.join(__dirname, '/i18n/'),
-        //         watch: true,
-        //       },
-        //     }),
+        I18nModule.forRootAsync({
+            useFactory: (configService: ApiConfigService) => ({
+                fallbackLanguage: 'en',
+              loaderOptions: {
+                path: path.join(__dirname, '/i18n/'),
+                watch: true,
+              },
+            }),
 
-        //     resolvers: [
-        //              { use: QueryResolver, options: ['lang'] },
-        //              AcceptLanguageResolver,
-        //            ],
-        //     // inject: [ApiConfigService],
-        //   }),
+            resolvers: [
+                     { use: QueryResolver, options: ['lang'] },
+                     AcceptLanguageResolver,
+                   ],
+            // inject: [ApiConfigService],
+          }),
 
         ConfigModule.forRoot({
             isGlobal: true,
@@ -85,14 +91,16 @@ const path = require('path');
         RnPagesModule,
         RnPageTranslationsModule,
         RnCurrenciesModule,
-        RnCurrencyTranslationsModule
-        // I18nModule
+        RnCurrencyTranslationsModule,
+        RnCategoriesModule,
+        RnCategoryTranslationsModule,
+        I18nModule
 
 
     ],
 
-    // controllers: [AppController],
-    // providers: [AppService]
+    controllers: [AppController],
+    providers: [AppService]
 
 })
 

@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RnPageTranslationsDTO } from 'src/dto/rn_page_tanslations.dto';
-import { RnPageTranslations } from 'src/entity/rn_page_translations';
-import { RnUsers } from 'src/entity/rn_users';
+import { RnPageTranslations } from 'src/entity/rn_page_translations.entity';
+import { RnUsers } from 'src/entity/rn_users.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()

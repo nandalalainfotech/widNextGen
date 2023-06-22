@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nes
 import { ApiBearerAuth } from '@nestjs/swagger/dist/decorators/api-bearer.decorator';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RnRolesDTO } from 'src/dto/rn_roles.dto';
-import { RnRoles } from 'src/entity/rn_roles';
+import { RnRoles } from 'src/entity/rn_roles.entity';
 import { hasRole } from 'src/roles/role.decorator';
 import { Role } from 'src/roles/role.enum';
 import { RolesGuard } from 'src/roles/role.guard';
