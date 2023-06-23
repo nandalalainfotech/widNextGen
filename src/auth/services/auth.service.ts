@@ -26,9 +26,10 @@ export class AuthService {
 		return from(this.jwtService.signAsync(payload));
 	}
 
-	async getUserAuthentication( password: string, username: string) {
-		console.log("username,password==>",password, username);
-		const rnUsers: RnUsers = await this.rnUsersRepository.findOne({ relations: [ 'role'], where: { username: username } });
+	async validateUser( password: string, email: string) {
+		console.log("email,password==>",password, email);
+		const rnUsers: RnUsers = await this.rnUsersRepository.findOne({ relations: [ 'role'], where: { email: email } });
+    console.log("rnUsers==>", rnUsers);
 		let rnUsersDTO = new RnUsersDTO();
 
 		if (rnUsersDTO) {
@@ -36,7 +37,7 @@ export class AuthService {
 			 if (rnUsers) {
 				rnUsersDTO.setProperties(rnUsers);
 				rnUsersDTO.password = null;
-				
+        console.log("(rnUsers.username, rnUsers.status, rnUsers.role==>0", (rnUsers.username, rnUsers.status, rnUsers.role));
 				return this.generateJwt(rnUsers.username, rnUsers.status, rnUsers.role).pipe(map((jwt: string) => {
 					return { rnUsersDTO, access_token: jwt };
 				})

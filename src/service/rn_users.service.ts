@@ -27,11 +27,11 @@ export class RnUsersService {
 	
 		for (let i = 0; i < rnUser.length; i++) {
 			if (rnUsersDTO.username.toLowerCase() == rnUser[i].username.toLowerCase()) {
-				throw new HttpException('type Already Exist', HttpStatus.INTERNAL_SERVER_ERROR);
+				throw new HttpException('username Already Exist', HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 
 			if (rnUsersDTO.email.toLowerCase() == rnUser[i].email.toLowerCase()) {
-				throw new HttpException('username Already Exist', HttpStatus.INTERNAL_SERVER_ERROR);
+				throw new HttpException('email Already Exist', HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 
 			// if (rnUsersDTO.mobileNo.toLowerCase() == rnUser[i].mobileNo.toLowerCase()) {
