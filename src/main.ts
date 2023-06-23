@@ -27,6 +27,7 @@ async function bootstrap() {
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
     next();
+    return res;
 });
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
