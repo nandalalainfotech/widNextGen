@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { RnCategoryTranslationsDTO } from 'src/dto/rn_category_translations.dto';
+import { RnCategoryTranslationsDTO } from 'src/dto/rn_reviewcurrency_translations.dto';
 import { RnCategoryTranslations } from 'src/entity/rn_reviewcategory_translations.entity';
 import { Repository } from 'typeorm';
 
@@ -21,20 +21,22 @@ export class RnCategoryTranslationsService {
 			}
 		}
 		console.log("rnCategoryTranslationsDTO===============>226", rnCategoryTranslationsDTO);
-        let role = await this.rnRoleRepository.findOne({ where: { roleId: rnCategoryTranslationsDTO.roleId } });
+        let role = await this.rnRoleRepository.findOne({ where: { id: rnCategoryTranslationsDTO.id } });
         console.log("role===============>226", role);
         let category = await this.rnCategoryRepository.findOne({ where: { categoryId: rnCategoryTranslationsDTO.categoryId } });
         console.log("category===============>226", category);
 		const rnCategoryTranslationss = new RnCategoryTranslations();
 		rnCategoryTranslationss.setProperties(rnCategoryTranslationsDTO);
         console.log("rnCategoryTranslationss===>226", rnCategoryTranslationss);
+		rnCategoryTranslationss.createdBy = rnCategoryTranslationsDTO.createdBy;
+		rnCategoryTranslationss.createdAt = rnCategoryTranslationsDTO.createdAt;
 		await this.rnCategoryTranslationsRepository.save(rnCategoryTranslationss);
 		return rnCategoryTranslationss;
 	}
 	async update(rnCategoryTranslationsDTO: RnCategoryTranslationsDTO): Promise<RnCategoryTranslations> {
 		const rnCategoryTranslations = new RnCategoryTranslations();
 		rnCategoryTranslations.setProperties(rnCategoryTranslationsDTO);
-		await this.rnCategoryTranslationsRepository.update({ roleId: rnCategoryTranslations.roleId }, rnCategoryTranslations);
+		await this.rnCategoryTranslationsRepository.update({ id: rnCategoryTranslations.id }, rnCategoryTranslations);
 		return rnCategoryTranslations;
 	}
 

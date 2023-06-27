@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger/dist/decorators/api-bearer.decorator';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RnCategoryTranslationsDTO } from 'src/dto/rn_category_translations.dto';
+import { RnCategoryTranslationsDTO } from 'src/dto/rn_reviewcurrency_translations.dto';
 import { RnCategoryTranslations } from 'src/entity/rn_reviewcategory_translations.entity';
 import { hasRole } from 'src/roles/role.decorator';
 import { Role } from 'src/roles/role.enum';
@@ -10,7 +10,7 @@ import { RnCategoryTranslationsService } from 'src/service/rn_reviewcategory_tra
 
 
 @ApiBearerAuth()
-@Controller('/wdinext/api/reviewcategorytranslations')
+@Controller('/api/reviewcategorytranslations')
 export class RnCategorytranslationsController {
 	constructor(private readonly rnCategorytranslationsServices: RnCategoryTranslationsService) { }
 

@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RnCategorytranslationsController } from 'src/controller/rn_reviewcategory_translations.controller';
 import { RnRolesController } from 'src/controller/rn_roles.controller';
 import { RnUsersController } from 'src/controller/rn_users.controller';
 import { RnCategoryTranslations } from 'src/entity/rn_reviewcategory_translations.entity';
@@ -14,6 +13,6 @@ import { RnUsersService } from 'src/service/rn_users.service';
 @Module({
   imports: [TypeOrmModule.forFeature([RnCategoryTranslations, RnRoles, RnUsers])],
   providers: [RnCategoryTranslationsService, RnUsersService, RnRolesService, RolesGuard],
-  controllers: [RnCategorytranslationsController, RnRolesController, RnUsersController],
+  controllers: [ RnRolesController, RnUsersController],
 })
 export class RnCategoryTranslationsModule { }

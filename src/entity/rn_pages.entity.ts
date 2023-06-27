@@ -1,58 +1,37 @@
-import {
-    Column,
-    Entity,
-    Index,
-    JoinColumn,
-    ManyToOne,
-    PrimaryGeneratedColumn,
-  } from "typeorm";
-import { RnRoles } from "./rn_roles.entity";
 import { RnPagesDTO } from "src/dto/rn_pages.dto";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-  
-  @Index("role_id", ["roleId"], {})
-  @Entity("rn_pages", { schema: "wdinext" })
-  export class RnPages {
-    @PrimaryGeneratedColumn({ type: "int", name: "id" })
-    id: number;
-  
-    @Column("varchar", { name: "type", nullable: true, length: 255 })
-    type: string | null;
-  
-    @Column("int", { name: "status", nullable: true })
-    status: number | null;
-  
-    @Column("int", { name: "role_id" })
-    roleId: number;
-  
-    @Column("varchar", { name: "insert_user", length: 40 })
-    insertUser: string;
-  
-    @Column("datetime", { name: "insert_datetime" })
-    insertDatetime: Date | null;
-  
-    @Column("varchar", { name: "updated_user", nullable: true, length: 40 })
-    updatedUser: string | null;
-  
-    @Column("datetime", { name: "updated_datetime", nullable: true })
-    updatedDatetime: Date | null;
-  
-    @ManyToOne(() => RnRoles, (rnRoles) => rnRoles.rnPages, {
-      onDelete: "RESTRICT",
-      onUpdate: "RESTRICT",
-    })
-    @JoinColumn([{ name: "role_id", referencedColumnName: "roleId" }])
-    role: RnRoles;
+@Entity("rn_pages", { schema: "wdinext" })
+export class RnPages {
+  @PrimaryGeneratedColumn({ type: "bigint", name: "id", unsigned: true })
+  id: string;
+
+  @Column("varchar", { name: "type", nullable: true, length: 12 })
+  type: string | null;
+
+  @Column("tinyint", { name: "status", unsigned: true, default: () => "'0'" })
+  status: number;
+
+  @Column("bigint", { name: "created_by", nullable: true, unsigned: true })
+  createdBy: string | null;
+
+  @Column("datetime", { name: "created_at", nullable: true })
+  createdAt: Date | null;
+
+  @Column("bigint", { name: "updated_by", nullable: true, unsigned: true })
+  updatedBy: string | null;
+
+  @Column("datetime", { name: "updated_at", nullable: true })
+  updatedAt: Date | null;
 
     
     setProperties(rnPagesDTO: RnPagesDTO) {
         this.id = rnPagesDTO.id;
         this.type = rnPagesDTO.type;
         this.status = rnPagesDTO.status;
-        this.roleId = rnPagesDTO.roleId;
-        this.insertUser = rnPagesDTO.insertUser;
-        this.insertDatetime = rnPagesDTO.insertDatetime;
-        this.updatedUser = rnPagesDTO.updatedUser;
-        this.updatedDatetime = rnPagesDTO.updatedDatetime;
+        this.createdBy = rnPagesDTO.createdBy;
+        this.createdAt = rnPagesDTO.createdAt;
+        this.updatedBy = rnPagesDTO.updatedBy;
+        this.updatedAt = rnPagesDTO.updatedAt;
       }
     }

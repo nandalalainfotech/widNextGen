@@ -5,13 +5,10 @@ import { RnPageTranslations } from "src/entity/rn_page_translations.entity";
 
 export class RnPageTranslationsDTO extends BaseDTO {
     @ApiModelProperty({})
-    id: number;
+    id: string;
 
     @ApiModelProperty({})
     pageId: string;
-
-    @ApiModelProperty({})
-    roleId: number;
 
     @ApiModelProperty({})
     locale: string;
@@ -26,7 +23,7 @@ export class RnPageTranslationsDTO extends BaseDTO {
     content: string;
 
     @ApiModelProperty({})
-    seoTitle: string;
+    metaTitle: string;
 
 
     @ApiModelProperty({})
@@ -37,18 +34,17 @@ export class RnPageTranslationsDTO extends BaseDTO {
 
     setProperties(rnPageTranslations: RnPageTranslations) {
         this.id = rnPageTranslations.id;
-        this.roleId = rnPageTranslations.roleId;
         this.pageId = rnPageTranslations.pageId;
         this.locale = rnPageTranslations.locale;
         this.title = rnPageTranslations.title;
         this.slug = rnPageTranslations.slug;
         this.content = rnPageTranslations.content;
-        this.seoTitle = rnPageTranslations.seoTitle;
+        this.metaTitle = rnPageTranslations.metaTitle;
         this.metaDescription = rnPageTranslations.metaDescription;
         this.metaKeywords = rnPageTranslations.metaKeywords;
-        this.insertUser = rnPageTranslations.insertUser;
-        this.insertDatetime = rnPageTranslations.insertDatetime;
-        this.updatedUser = rnPageTranslations.updatedUser;
-        this.updatedDatetime = rnPageTranslations.updatedDatetime;
+        this.createdBy = rnPageTranslations.createdBy;
+        this.createdAt = rnPageTranslations.createdAt;
+        this.updatedBy = rnPageTranslations.updatedBy;
+        this.updatedAt = rnPageTranslations.updatedAt;
       }
 }

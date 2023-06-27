@@ -2,23 +2,26 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nes
 import { ApiBearerAuth } from '@nestjs/swagger/dist/decorators/api-bearer.decorator';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RnCurrenciesDTO } from 'src/dto/rn_currencies.dto';
+import { RnCurrencyTranslationsDTO } from 'src/dto/rn_currency_translations.dto';
 import { RnCurrencies } from 'src/entity/rn_currencies.entity';
 import { hasRole } from 'src/roles/role.decorator';
 import { Role } from 'src/roles/role.enum';
 import { RolesGuard } from 'src/roles/role.guard';
 import { RnCurrenciesService } from 'src/service/rn_currencies.service';
+import { RnCurrencyTranslationsService } from 'src/service/rn_currency_translations.service';
 
 
 @ApiBearerAuth()
-@Controller('/wdinext/api/currencies')
+@Controller('/api/currencies')
 export class RnCurrenciesController {
-	constructor(private readonly rnCurrenciesServices: RnCurrenciesService) { }
+	constructor(private readonly rnCurrenciesServices: RnCurrenciesService, 
+		private readonly rnCurrencyTranslationsServices: RnCurrencyTranslationsService) { }
 
 	
 	@UseGuards(JwtAuthGuard, RolesGuard)
-	@hasRole(Role.superadmin)
-	@Post("")
-	create(@Body() rnCurrenciesDTO: RnCurrenciesDTO): Promise<RnCurrencies> {
+	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+	@Post("/post")
+	create(@Body() rnCurrenciesDTO: RnCurrenciesDTO): Promise<RnCurrenciesDTO> {
 		return this.rnCurrenciesServices.create(rnCurrenciesDTO);
 	}
 

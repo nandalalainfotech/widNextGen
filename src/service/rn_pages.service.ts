@@ -27,15 +27,15 @@ export class RnPagesService {
 		}
 		console.log("rnPagesDTO===============>13", rnPagesDTO);
 
-		const rnLanguages = new RnPages();
-		rnLanguages.setProperties(rnPagesDTO);
-		await this.rnPagesRepository.save(rnLanguages);
-		return rnLanguages;
+		const rnPagess = new RnPages();
+		rnPagess.setProperties(rnPagesDTO);
+		await this.rnPagesRepository.save(rnPagess);
+		return rnPagess;
 	}
 	async update(rnPagesDTO: RnPagesDTO): Promise<RnPages> {
 		const rnPages = new RnPages();
 		rnPages.setProperties(rnPagesDTO);
-		await this.rnPagesRepository.update({ roleId: rnPages.roleId }, rnPages);
+		await this.rnPagesRepository.update({ id: rnPages.id }, rnPages);
 		return rnPages;
 	}
 

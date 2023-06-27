@@ -1,4 +1,4 @@
-import { RnCategoryTranslationsDTO } from "src/dto/rn_reviewcurrency_translations.dto";
+import { RnCategoryTranslationsDTO } from "src/dto/rn_category_translations.dto";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("rn_category_translations", { schema: "wdinext" })

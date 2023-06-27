@@ -4,11 +4,11 @@ import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@n
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, Observable } from 'rxjs';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { map } from 'rxjs/operators';
 import { RnUsers } from 'src/entity/rn_users.entity';
-import { RnUsersDTO } from 'src/dto/rn_users.dto';
+import { Users } from 'src/dto/rn_users.dto';
 
 ;
 
@@ -31,16 +31,16 @@ export class AuthService {
 		console.log("email,password==>",password, username);
 		const rnUsers: RnUsers = await this.rnUsersRepository.findOne({ relations: [ 'role'], where: { username: username } });
     console.log("rnUsers==>", rnUsers);
-		let rnUsersDTO = new RnUsersDTO();
+		let users = new Users();
 
-		if (rnUsersDTO) {
+		if (users) {
 			const isMatch = await bcrypt.compare(password, rnUsers.password);																																																							
 			 if (rnUsers) {
-				rnUsersDTO.setProperties(rnUsers);
-				rnUsersDTO.password = null;
+				users.setProperties(rnUsers);
+				users.password = null;
         console.log("(rnUsers.username, rnUsers.status, rnUsers.role==>0", (rnUsers.username, rnUsers.status, rnUsers.role));
 				return this.generateJwt(rnUsers.username, rnUsers.status, rnUsers.role).pipe(map((jwt: string) => {
-					return { rnUsersDTO, access_token: jwt };
+					return { users, access_token: jwt };
 				})
 				)
 			} 
@@ -51,29 +51,59 @@ export class AuthService {
 		}
 	}
 	async validateUser( password: string, email: string) {
-		console.log("email,password==>",password, email);
-		const rnUsers: RnUsers = await this.rnUsersRepository.findOne({ relations: [ 'role'], where: { email: email } });
-    console.log("rnUsers==>", rnUsers);
-		let rnUsersDTO = new RnUsersDTO();
+		if(password && email){
+			const rnUsers: RnUsers = await this.rnUsersRepository.findOne({ relations: [ 'role'], where: { email: email } });
+			let users = new Users();
+			if(rnUsers){
+				if(rnUsers.password == password){
+					if (users) {																																																						
+						 if (rnUsers) {
+							users.setProperties(rnUsers);
+							users.password = null;
+							console.log("(rnUsers.username, rnUsers.status, rnUsers.role==>0", (rnUsers.username, rnUsers.status, rnUsers.role));
+							return this.generateJwt(rnUsers.username, rnUsers.status, rnUsers.role).pipe(map((jwt: string) => {
+								return { users, access_token: jwt };
+							})
+							)
+						} 
+						else {
+							// throw new UnauthorizedException("Invalid Password");
+							throw new HttpException('Invalid Password', HttpStatus.UNPROCESSABLE_ENTITY);
+						}
+					}
+				}else{
+					throw new HttpException({
+						message:'Invalid Password',
+						errors:{
+							email:"please Enter Valid Password"
+						}
+						
+					}, HttpStatus.UNPROCESSABLE_ENTITY);
+				}
 
-		if (rnUsersDTO) {
-			const isMatch = await bcrypt.compare(password, rnUsers.password);																																																							
-			 if (rnUsers) {
-				rnUsersDTO.setProperties(rnUsers);
-				rnUsersDTO.password = null;
-        console.log("(rnUsers.username, rnUsers.status, rnUsers.role==>0", (rnUsers.username, rnUsers.status, rnUsers.role));
-				return this.generateJwt(rnUsers.username, rnUsers.status, rnUsers.role).pipe(map((jwt: string) => {
-					return { rnUsersDTO, access_token: jwt };
-				})
-				)
-			} 
-			else {
-				// throw new UnauthorizedException("Invalid Password");
-				throw new HttpException('Invalid Password', HttpStatus.INTERNAL_SERVER_ERROR);
+			}else{
+				throw new HttpException({
+					message:'Invalid Email',
+					errors:{
+						email:"please Enter Valid Email"
+					}
+					
+				}, HttpStatus.UNPROCESSABLE_ENTITY);
 			}
-		} 
-		else {
-			throw new HttpException('Invalid Username', HttpStatus.INTERNAL_SERVER_ERROR);
+		}else{
+			throw new HttpException({
+				message:'Invalid Data',
+				errors:{
+					email:"please Enter Valid Email",
+					password:"please Enter Valid Password"
+				}
+				
+			}, HttpStatus.UNPROCESSABLE_ENTITY);
+
 		}
+		
 	}
+	
+		
 }
+

@@ -11,17 +11,20 @@ import { RnPermissionsService } from 'src/service/rn_permissions.service';
 
 
 @ApiBearerAuth()
-@Controller('/wdinext/api/permissions')
+@Controller('/api/permissions')
 export class RnPermissionsController {
 	rnRolesService: any;
 	constructor(private readonly rnPermissionService: RnPermissionsService) { }
 
-	@UseGuards(JwtAuthGuard)
+		
+	@UseGuards(JwtAuthGuard, RolesGuard)
 	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
-	@Get("/:roleId")
+	@Get('')
 	findAll(): Promise<RnPermissions[]> {
-		return this.rnRolesService.findAll();
+		return this.rnPermissionService.findAll();
 	}
+
+
 	@UseGuards(JwtAuthGuard)
 	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
 	@Put("/:roleId")

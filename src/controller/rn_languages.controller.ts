@@ -11,7 +11,7 @@ import { RnLanguagesService } from 'src/service/rn_languages.service';
 
 
 @ApiBearerAuth()
-@Controller('/wdinext/api/languages')
+@Controller('/api/languages')
 export class RnLanguagesController {
     constructor(private readonly rnLanguagesService: RnLanguagesService) { }
 
@@ -32,8 +32,8 @@ export class RnLanguagesController {
     @UseGuards(JwtAuthGuard, RolesGuard)
       @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
     @Put("/:id")
-    update(@Body() RnLanguages: RnLanguages): Promise<RnLanguages> {
-        return this.rnLanguagesService.update(RnLanguages);
+    update(@Body() rnLanguages: RnLanguages): Promise<RnLanguages> {
+        return this.rnLanguagesService.update(rnLanguages);
     }
 
     @UseGuards(JwtAuthGuard, RolesGuard)

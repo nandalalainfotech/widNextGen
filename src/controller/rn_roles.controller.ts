@@ -10,7 +10,7 @@ import { RnRolesService } from 'src/service/rn_roles.service';
 
 
 @ApiBearerAuth()
-@Controller('/wdinext/api/roles')
+@Controller('/api/roles')
 export class RnRolesController {
 	constructor(private readonly rnRolesService: RnRolesService) { }
 

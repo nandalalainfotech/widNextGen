@@ -1,11 +1,11 @@
 import { ApiModelProperty } from "@nestjs/swagger";
-import { RnLanguages } from "src/entity/rn_languages.entity";
-import { BaseDTO } from "./Base.dto";
 import { RnCurrencies } from "src/entity/rn_currencies.entity";
+import { BaseDTO } from "./Base.dto";
+import { RnCurrencyTranslations } from "src/entity/rn_currency_translations.entity";
 
 export class RnCurrenciesDTO extends BaseDTO {
     @ApiModelProperty({})
-    id: number;
+    id: string;
 
     @ApiModelProperty({})
     code: string;
@@ -14,30 +14,37 @@ export class RnCurrenciesDTO extends BaseDTO {
     symbol: string;
 
     @ApiModelProperty({})
-    roleId: number;
-
-    @ApiModelProperty({})
-    regionCode: string;
-
-    @ApiModelProperty({})
-    photo: string;
-
-    @ApiModelProperty({})
     default: number;
-  
 
-    setProperties(rnCurrencies: RnCurrencies) {
+    // @ApiModelProperty({})
+    // id: string;
+
+    @ApiModelProperty({})
+    currencyId: string;
+
+    @ApiModelProperty({})
+    locale: string;
+
+    @ApiModelProperty({})
+    name: string;
+
+
+    setProperties(rnCurrencies: RnCurrencies, rnCurrencyTranslations: RnCurrencyTranslations) {
         this.id = rnCurrencies.id;
         this.code = rnCurrencies.code;
         this.symbol = rnCurrencies.symbol;
-        this.regionCode = rnCurrencies.regionCode;
-        this.roleId = rnCurrencies.roleId;
-        this.photo = rnCurrencies.photo;
-        this.photo = rnCurrencies.photo;
         this.default = rnCurrencies.default;
-        this.insertUser = rnCurrencies.insertUser;
-        this.insertDatetime = rnCurrencies.insertDatetime;
-        this.updatedUser = rnCurrencies.updatedUser;
-        this.updatedDatetime = rnCurrencies.updatedDatetime;
-      }
+        this.createdBy = rnCurrencies.createdBy;
+        this.createdAt = rnCurrencies.createdAt;
+        this.updatedBy = rnCurrencies.updatedBy;
+        this.updatedAt = rnCurrencies.updatedAt;
+
+        this.currencyId = rnCurrencyTranslations.currencyId;
+        this.locale = rnCurrencyTranslations.locale;
+        this.name = rnCurrencyTranslations.name;
+        this.createdBy = rnCurrencyTranslations.createdBy;
+        this.createdAt = rnCurrencyTranslations.createdAt;
+        this.updatedBy = rnCurrencyTranslations.updatedBy;
+        this.updatedAt = rnCurrencyTranslations.updatedAt;
+    }
 }

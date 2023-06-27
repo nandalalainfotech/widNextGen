@@ -1,32 +1,27 @@
 import { ApiModelProperty } from "@nestjs/swagger";
-import { RnCurrencyTranslations } from "src/entity/rn_currency_translations.entity";
+import { RnCategoryTranslations } from "src/entity/rn_reviewcategory_translations.entity";
 import { BaseDTO } from "./Base.dto";
 
-export class RnCurrencyTranslationsDTO extends BaseDTO {
-    @ApiModelProperty({})
-    id: number;
+export class RnCategoryTranslationsDTO extends BaseDTO {
+  id: string;
 
-    @ApiModelProperty({})
-    currencyId: string;
+  @ApiModelProperty({})
+  categoryId: number;
 
-    @ApiModelProperty({})
-    locale: string;
+  @ApiModelProperty({})
+  locale: string;
 
-    @ApiModelProperty({})
-    roleId: number;
+  @ApiModelProperty({})
+  name: string;
 
-    @ApiModelProperty({})
-    name: string;
-
-    setProperties(rnCurrencyTranslations: RnCurrencyTranslations) {
-        this.id = rnCurrencyTranslations.id;
-        this.currencyId = rnCurrencyTranslations.currencyId;
-        this.locale = rnCurrencyTranslations.locale;
-        this.name = rnCurrencyTranslations.name;
-        this.roleId = rnCurrencyTranslations.roleId;
-        this.insertUser = rnCurrencyTranslations.insertUser;
-        this.insertDatetime = rnCurrencyTranslations.insertDatetime;
-        this.updatedUser = rnCurrencyTranslations.updatedUser;
-        this.updatedDatetime = rnCurrencyTranslations.updatedDatetime;
-      }
+  setProperties(rnCategoryTranslations: RnCategoryTranslations) {
+    this.id = rnCategoryTranslations.id;
+    this.categoryId = rnCategoryTranslations.categoryId;
+    this.locale = rnCategoryTranslations.locale;
+    this.name = rnCategoryTranslations.name;
+    this.createdBy = rnCategoryTranslations.createdBy;
+    this.createdAt = rnCategoryTranslations.createdAt;
+    this.updatedBy = rnCategoryTranslations.updatedBy;
+    this.updatedAt = rnCategoryTranslations.updatedAt;
+  }
 }

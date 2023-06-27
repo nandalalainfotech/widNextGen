@@ -4,13 +4,10 @@ import { RnPages } from "src/entity/rn_pages.entity";
 
 export class RnPagesDTO extends BaseDTO {
     @ApiModelProperty({})
-    id: number;
+    id: string;
 
     @ApiModelProperty({})
     type: string | null;
-
-    @ApiModelProperty({})
-    roleId: number;
 
     @ApiModelProperty({})
     status: number | null;
@@ -18,11 +15,10 @@ export class RnPagesDTO extends BaseDTO {
     setProperties(rnPages: RnPages) {
         this.id = rnPages.id;
         this.type = rnPages.type;
-        this.roleId = rnPages.roleId;
         this.status = rnPages.status;
-        this.insertUser = rnPages.insertUser;
-        this.insertDatetime = rnPages.insertDatetime;
-        this.updatedUser = rnPages.updatedUser;
-		this.updatedDatetime = rnPages.updatedDatetime;
+        this.createdBy = rnPages.createdBy;
+        this.createdAt = rnPages.createdAt;
+        this.updatedBy = rnPages.updatedBy;
+        this.updatedAt = rnPages.updatedAt;
     }
 }

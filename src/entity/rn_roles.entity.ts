@@ -1,65 +1,27 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { RnUsers } from "./rn_users.entity";
 import { RnPermissions } from "./rn_permissions.entity";
-import { RnPages } from "./rn_pages.entity";
-import { RnPageTranslations } from "./rn_page_translations.entity";
-import { RnLanguages } from "./rn_languages.entity";
-import { RnCurrencyTranslations } from "./rn_currency_translations.entity";
-import { RnCurrencies } from "./rn_currencies.entity";
-import { RnCategories } from "./rn_reviewcategories.entity";
 import { RnRolesDTO } from "src/dto/rn_roles.dto";
-import { RnCategoryTranslations } from "./rn_reviewcategory_translations.entity";
-
 
 @Entity("rn_roles", { schema: "wdinext" })
 export class RnRoles {
-  @PrimaryGeneratedColumn({ type: "int", name: "role_id" })
-  roleId: number;
+  @PrimaryGeneratedColumn({ type: "bigint", name: "id", unsigned: true })
+  id: string;
 
-  @Column("varchar", { name: "rolename", length: 40 })
-  rolename: string;
+  @Column("varchar", { name: "name", length: 40 })
+  name: string;
 
-  @Column("varchar", { name: "insert_user", length: 40 })
-  insertUser: string;
+  @Column("bigint", { name: "created_by", nullable: true, unsigned: true })
+  createdBy: string | null;
 
-  @Column("varchar", { name: "updated_user", nullable: true, length: 40 })
-  updatedUser: string | null;
+  @Column("datetime", { name: "created_at", nullable: true })
+  createdAt: Date | null;
 
-  @Column("datetime", { name: "updated_datetime", nullable: true })
-  updatedDatetime: Date | null;
+  @Column("bigint", { name: "updated_by", nullable: true, unsigned: true })
+  updatedBy: string | null;
 
-  @Column("datetime", { name: "insert_datetime", nullable: true })
-  insertDatetime: Date | null;
-
-  @OneToMany(
-    () => RnCategoryTranslations,
-    (rnCategoryTranslations) => rnCategoryTranslations.role
-  )
-  rnCategoryTranslations: RnCategoryTranslations[];
-
-  @OneToMany(() => RnCategories, (rnCategories) => rnCategories.role)
-  rnCategories: RnCategories[];
-
-  @OneToMany(() => RnCurrencies, (rnCurrencies) => rnCurrencies.role)
-  rnCurrencies: RnCurrencies[];
-
-  @OneToMany(
-    () => RnCurrencyTranslations,
-    (rnCurrencyTranslations) => rnCurrencyTranslations.role
-  )
-  rnCurrencyTranslations: RnCurrencyTranslations[];
-
-  @OneToMany(() => RnLanguages, (rnLanguages) => rnLanguages.role)
-  rnLanguages: RnLanguages[];
-
-  @OneToMany(
-    () => RnPageTranslations,
-    (rnPageTranslations) => rnPageTranslations.role
-  )
-  rnPageTranslations: RnPageTranslations[];
-
-  @OneToMany(() => RnPages, (rnPages) => rnPages.role)
-  rnPages: RnPages[];
+  @Column("datetime", { name: "updated_at", nullable: true })
+  updatedAt: Date | null;
 
   @OneToMany(() => RnPermissions, (rnPermissions) => rnPermissions.role)
   rnPermissions: RnPermissions[];
@@ -68,13 +30,12 @@ export class RnRoles {
   rnUsers: RnUsers[];
 
 
-
   setProperties(rnRolesDTO: RnRolesDTO) {
-    this.roleId = rnRolesDTO.roleId;
-    this.rolename = rnRolesDTO.rolename;
-    this.insertUser = rnRolesDTO.insertUser;
-    this.insertDatetime = rnRolesDTO.insertDatetime;
-    this.updatedUser = rnRolesDTO.updatedUser;
-    this.updatedDatetime = rnRolesDTO.updatedDatetime;
+    this.id = rnRolesDTO.id;
+    this.name = rnRolesDTO.name;
+    this.createdBy = rnRolesDTO.createdBy;
+    this.createdAt = rnRolesDTO.createdAt;
+    this.updatedBy = rnRolesDTO.updatedBy;
+    this.updatedAt = rnRolesDTO.updatedAt;
   }
 }

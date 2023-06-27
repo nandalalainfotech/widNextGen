@@ -4,7 +4,7 @@ import { BaseDTO } from "./Base.dto";
 
 export class RnLanguagesDTO extends BaseDTO {
     @ApiModelProperty({})
-    id: number;
+    id: string;
 
     @ApiModelProperty({})
     name: string;
@@ -13,16 +13,13 @@ export class RnLanguagesDTO extends BaseDTO {
     locale: string;
 
     @ApiModelProperty({})
-    roleId: number;
-
-    @ApiModelProperty({})
     isoCode: string;
 
     @ApiModelProperty({})
     direction: string | null;
 
     @ApiModelProperty({})
-    photo: string;
+    image: string;
 
     @ApiModelProperty({})
     ordering: number;
@@ -31,22 +28,21 @@ export class RnLanguagesDTO extends BaseDTO {
     default: number;
 
     @ApiModelProperty({})
-    status: string;
+    status: number;
 
     setProperties(rnLanguages: RnLanguages) {
         this.id = rnLanguages.id;
         this.name = rnLanguages.name;
         this.locale = rnLanguages.locale;
         this.isoCode = rnLanguages.isoCode;
-        this.roleId = rnLanguages.roleId;
         this.direction = rnLanguages.direction;
-        this.photo = rnLanguages.photo;
+        this.image = rnLanguages.image;
         this.ordering = rnLanguages.ordering;
         this.default = rnLanguages.default;
         this.status = rnLanguages.status;
-        this.insertUser = rnLanguages.insertUser;
-        this.insertDatetime = rnLanguages.insertDatetime;
-        this.updatedUser = rnLanguages.updatedUser;
-        this.updatedDatetime = rnLanguages.updatedDatetime;
+        this.createdBy = rnLanguages.createdBy;
+        this.createdAt = rnLanguages.createdAt;
+        this.updatedBy = rnLanguages.updatedBy;
+        this.updatedAt = rnLanguages.updatedAt;
       }
 }

@@ -4,27 +4,38 @@ import { BaseDTO } from "./Base.dto";
 
 export class RnPermissionsDTO extends BaseDTO {
     @ApiModelProperty({})
-    id: number;
+    id: string;
 
     @ApiModelProperty({})
     controller: string | null;
 
     @ApiModelProperty({})
-    roleId: number;
+    roleId: string;
 
     @ApiModelProperty({})
-    get: string;
+    actionView: string;
 
     @ApiModelProperty({})
-    put: string;
+    actionCreate: string;
+
+    @ApiModelProperty({})
+    actionUpdate: string;
+
+    @ApiModelProperty({})
+    actionDelete: string;
+
 
     setProperties(rnPermissions: RnPermissions) {
         this.id = rnPermissions.id;
         this.controller = rnPermissions.controller;
-        this.get = rnPermissions.get;
-        this.put = rnPermissions.put;
+        this.actionView = rnPermissions.actionView;
+        this.actionCreate = rnPermissions.actionCreate;
+        this.actionUpdate = rnPermissions.actionUpdate;
+        this.actionDelete = rnPermissions.actionDelete;
         this.roleId = rnPermissions.roleId;
-        this.insertUser = rnPermissions.insertUser;
-        this.insertDatetime = rnPermissions.insertDatetime;
+        this.createdBy = rnPermissions.createdBy;
+        this.createdAt = rnPermissions.createdAt;
+        this.updatedBy = rnPermissions.updatedBy;
+        this.updatedAt = rnPermissions.updatedAt;
     }
 }
