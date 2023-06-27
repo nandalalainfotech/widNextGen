@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger/dist/decorators/api-bearer.decorator';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RnCurrencyTranslationsDTO } from 'src/dto/rn_reviewcurrency_translations.dto';
+import { RnCurrencyTranslationsDTO } from 'src/dto/rn_currency_translations.dto';
 import { RnCurrencyTranslations } from 'src/entity/rn_currency_translations.entity';
 import { hasRole } from 'src/roles/role.decorator';
 import { Role } from 'src/roles/role.enum';
@@ -10,7 +10,7 @@ import { RnCurrencyTranslationsService } from 'src/service/rn_currency_translati
 
 
 @ApiBearerAuth()
-@Controller('/wdinext/api/currencytranslations')
+@Controller('/api/currencytranslations')
 export class RnCurrencyTranslationsController {
 	constructor(private readonly rnCurrencyTranslationsServices: RnCurrencyTranslationsService) { }
 

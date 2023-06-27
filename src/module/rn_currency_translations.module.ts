@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RnCurrencyTranslationsController } from 'src/controller/rn_currency_translations.controller';
 import { RnRolesController } from 'src/controller/rn_roles.controller';
 import { RnUsersController } from 'src/controller/rn_users.controller';
 import { RnCurrencyTranslations } from 'src/entity/rn_currency_translations.entity';
@@ -14,6 +13,6 @@ import { RnUsersService } from 'src/service/rn_users.service';
 @Module({
   imports: [TypeOrmModule.forFeature([RnCurrencyTranslations, RnRoles, RnUsers])],
   providers: [RnCurrencyTranslationsService, RnUsersService, RnRolesService, RolesGuard],
-  controllers: [RnCurrencyTranslationsController, RnRolesController, RnUsersController],
+  controllers: [ RnRolesController, RnUsersController],
 })
 export class RnCurrencyTranslationsModule { }

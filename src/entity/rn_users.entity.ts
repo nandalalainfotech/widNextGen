@@ -7,22 +7,22 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { RnRoles } from "./rn_roles.entity";
-import { RnUsersDTO } from "src/dto/rn_users.dto";
+import { Users } from "src/dto/rn_users.dto";
 
 @Index("role_id", ["roleId"], {})
 @Entity("rn_users", { schema: "wdinext" })
 export class RnUsers {
-  @PrimaryGeneratedColumn({ type: "int", name: "user_id" })
-  userId: number;
+  @PrimaryGeneratedColumn({ type: "bigint", name: "id", unsigned: true })
+  id: string;
 
-  @Column("int", { name: "role_id" })
-  roleId: number;
+  @Column("bigint", { name: "role_id", unsigned: true })
+  roleId: string;
 
-  @Column("varchar", { name: "firstname", length: 45 })
-  firstname: string;
+  @Column("varchar", { name: "first_name", length: 45 })
+  firstName: string;
 
-  @Column("varchar", { name: "lastname", length: 45 })
-  lastname: string;
+  @Column("varchar", { name: "last_name", length: 45 })
+  lastName: string;
 
   @Column("varchar", { name: "username", length: 40 })
   username: string;
@@ -30,14 +30,14 @@ export class RnUsers {
   @Column("varchar", { name: "password", length: 100 })
   password: string;
 
-  @Column("char", { name: "status", length: 1 })
-  status: string;
+  @Column("varchar", { name: "mobile", nullable: true, length: 15 })
+  mobile: string | null;
 
-  @Column("varchar", { name: "email", length: 30 })
+  @Column("int", { name: "status", unsigned: true, default: () => "'0'" })
+  status: number;
+
+  @Column("varchar", { name: "email", length: 120 })
   email: string;
-
-  @Column("varchar", { name: "mobile_no", nullable: true, length: 15 })
-  mobileNo: string | null;
 
   @Column("varchar", {
     name: "avatar",
@@ -46,42 +46,41 @@ export class RnUsers {
   })
   avatar: string;
 
-  @Column("varchar", { name: "insert_user", length: 40 })
-  insertUser: string;
+  @Column("bigint", { name: "created_by", nullable: true, unsigned: true })
+  createdBy: string | null;
 
-  @Column("datetime", { name: "insert_datetime" })
-  insertDatetime: Date | null;
+  @Column("datetime", { name: "created_at", nullable: true })
+  createdAt: Date | null;
 
-  @Column("varchar", { name: "updated_user", nullable: true, length: 40 })
-  updatedUser: string | null;
+  @Column("bigint", { name: "updated_by", nullable: true, unsigned: true })
+  updatedBy: string | null;
 
-  @Column("datetime", { name: "updated_datetime", nullable: true })
-  updatedDatetime: Date | null;
+  @Column("datetime", { name: "updated_at", nullable: true })
+  updatedAt: Date | null;
 
   @ManyToOne(() => RnRoles, (rnRoles) => rnRoles.rnUsers, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
   })
-  @JoinColumn([{ name: "role_id", referencedColumnName: "roleId" }])
+  @JoinColumn([{ name: "role_id", referencedColumnName: "id" }])
   role: RnRoles;
-    static roleId: any;
 
   
-  setProperties(rnUsersDTO: RnUsersDTO) {
-    this.userId = rnUsersDTO.userId;
-    this.firstname = rnUsersDTO.firstname;
-    this.lastname = rnUsersDTO.lastname;
-    this.username = rnUsersDTO.username;
-    this.roleId = rnUsersDTO.roleId;
-    this.password = rnUsersDTO.password;
-    this.status = rnUsersDTO.status;
-    this.email = rnUsersDTO.email;
-    this.mobileNo = rnUsersDTO.mobileNo;
-    this.avatar = rnUsersDTO.avatar;
-    this.insertUser = rnUsersDTO.insertUser;
-    this.insertDatetime = rnUsersDTO.insertDatetime;
-    this.updatedUser = rnUsersDTO.updatedUser;
-    this.updatedDatetime = rnUsersDTO.updatedDatetime;
+  setProperties(users: Users) {
+    this.id = users.id;
+    this.roleId = users.roleId;
+    this.firstName = users.firstName;
+    this.lastName = users.lastName;
+    this.username = users.username;
+    this.password = users.password;
+    this.mobile = users.mobile;
+    this.status = users.status;
+    this.email = users.email;
+    this.avatar = users.avatar;
+    this.createdBy = users.createdBy;
+    this.createdAt = users.createdAt;
+    this.updatedBy = users.updatedBy;
+    this.updatedAt = users.updatedAt;
     
   }
 }

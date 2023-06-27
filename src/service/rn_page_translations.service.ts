@@ -23,17 +23,21 @@ export class RnPageTranslationsService {
 
 		const rnPagetranslations = new RnPageTranslations();
 		rnPagetranslations.setProperties(rnPageTranslationsDTO);
+		rnPagetranslations.createdBy = rnPageTranslationsDTO.createdBy;
+		rnPagetranslations.createdAt = rnPageTranslationsDTO.createdAt;
 		await this.rnPageTranslationsRepository.save(rnPagetranslations);
 		return rnPagetranslations;
 	}
 	async update(rnPageTranslationsDTO: RnPageTranslationsDTO): Promise<RnPageTranslations> {
 		const rnPageTranslations = new RnPageTranslations();
 		rnPageTranslations.setProperties(rnPageTranslationsDTO);
-		await this.rnPageTranslationsRepository.update({ roleId: rnPageTranslations.roleId }, rnPageTranslations);
+		await this.rnPageTranslationsRepository.update({ id: rnPageTranslations.id }, rnPageTranslations);
 		return rnPageTranslations;
 	}
 
 	async findAll(): Promise<RnPageTranslations[]> {
+		console.log("service====>");
+		
 		return this.rnPageTranslationsRepository.find();
 	}
 	async findOne(roleId: number): Promise<RnPageTranslations> {

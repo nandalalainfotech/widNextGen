@@ -17,14 +17,20 @@ export class RnPermissionsService {
 
 
 	async findAll(): Promise<RnPermissions[]> {
+		console.log("RnPermissions==11", RnPermissions);
 		return this.rnPermissionsRepository.find({ relations: ["role"] });
 	}
 
 	async update(rnPermissionsDTO: RnPermissionsDTO): Promise<RnPermissions> {
 		const rnPermissions = new RnPermissions();
 		rnPermissions.controller = rnPermissionsDTO.controller;
-		rnPermissions.updatedUser = rnPermissionsDTO.updatedUser;
-		rnPermissions.updatedDatetime = rnPermissionsDTO.updatedDatetime;
+		rnPermissions.actionView = rnPermissionsDTO.actionView;
+		rnPermissions.actionCreate = rnPermissionsDTO.actionCreate;
+		rnPermissions.actionUpdate = rnPermissionsDTO.actionUpdate;
+		rnPermissions.actionDelete = rnPermissionsDTO.actionDelete;
+		rnPermissions.updatedBy = rnPermissionsDTO.updatedBy;
+		rnPermissions.updatedAt = rnPermissionsDTO.updatedAt;
+		console.log("rnPermissions===", rnPermissions);
 		await this.rnPermissionsRepository.update({ id: rnPermissionsDTO.id }, rnPermissions);
 		return rnPermissions;
 

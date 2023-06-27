@@ -1,67 +1,60 @@
 
 import { ApiModelProperty } from "@nestjs/swagger/dist/decorators/api-model-property.decorator";
 import { RnUsers } from "src/entity/rn_users.entity";
+import { BaseDTO } from "./Base.dto";
 
 
 
 
-export class RnUsersDTO  {
-  
-    userId: number;
+export class Users extends BaseDTO {
 
-    @ApiModelProperty({})
-    firstname: string;
+    id: string;
 
     @ApiModelProperty({})
-    lastname: string;
+    firstName: string;
+
+    @ApiModelProperty({})
+    lastName: string;
 
     @ApiModelProperty({})
     username: string;
 
     @ApiModelProperty({})
-    roleId: number;
+    roleId: string;
+  
+    @ApiModelProperty({})
+    email: string;
 
     @ApiModelProperty({})
     password: string;
 
     @ApiModelProperty({})
-    status: string;
+    status: number;
 
+    //   @isMobilePhone()
     @ApiModelProperty({})
-    email: string;
-
-    @ApiModelProperty({})
-    mobileNo: string | null;
+    mobile: string | null;
 
     @ApiModelProperty({})
     avatar: string | null;
 
-    @ApiModelProperty({})
-    insertUser: string;
-
-    @ApiModelProperty({})
-    insertDatetime: Date | null;
-    
-    updatedUser: string | null;
-    updatedDatetime: Date | null;
-
 
     setProperties(rnUsers: RnUsers) {
-        this.userId = rnUsers.userId;
-        this.firstname = rnUsers.firstname;
-        this.lastname = rnUsers.lastname;
-        this.username = rnUsers.username;
+        this.id = rnUsers.id;
         this.roleId = rnUsers.roleId;
+        this.firstName = rnUsers.firstName;
+        this.lastName = rnUsers.lastName;
+        this.username = rnUsers.username;
         this.password = rnUsers.password;
+        this.mobile = rnUsers.mobile;
         this.status = rnUsers.status;
         this.email = rnUsers.email;
-        this.mobileNo = rnUsers.mobileNo;
         this.avatar = rnUsers.avatar;
-        this.insertUser = rnUsers.insertUser;
-        this.insertDatetime = rnUsers.insertDatetime;
-        this.updatedUser = rnUsers.updatedUser;
-        this.updatedDatetime = rnUsers.updatedDatetime;
-       
-     
+        this.createdBy = rnUsers.createdBy;
+        this.createdAt = rnUsers.createdAt;
+        this.updatedBy = rnUsers.updatedBy;
+        this.updatedAt = rnUsers.updatedAt;
+
+
     }
 }

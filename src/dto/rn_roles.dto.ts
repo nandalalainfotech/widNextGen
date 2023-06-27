@@ -5,28 +5,20 @@ import { ApiModelProperty } from "@nestjs/swagger";
 
 
 export class RnRolesDTO extends BaseDTO {
-	roleId: number;
+	id: string;
 
 	@ApiModelProperty({})
-	rolename: string | null;
+	name: string | null;
 
-	@ApiModelProperty({})
-	insertUser: string;
-	
-	@ApiModelProperty({})
-	insertDatetime: Date;
 
-	updatedUser: string | null;
-	
-	updatedDatetime: Date | null;
 
 
 	setProperties(rnRoles: RnRoles) {
-		this.roleId = rnRoles.roleId;
-		this.rolename = rnRoles.rolename;
-		this.insertUser = rnRoles.insertUser;
-		this.insertDatetime = rnRoles.insertDatetime;
-		this.updatedUser = rnRoles.updatedUser;
-		this.updatedDatetime = rnRoles.updatedDatetime;
+		this.id = rnRoles.id;
+		this.name = rnRoles.name;
+		this.createdBy = rnRoles.createdBy;
+		this.createdAt = rnRoles.createdAt;
+		this.updatedBy = rnRoles.updatedBy;
+		this.updatedAt = rnRoles.updatedAt;
 	}
 }

@@ -10,7 +10,7 @@ import { RnPageTranslationsService } from 'src/service/rn_page_translations.serv
 
 
 @ApiBearerAuth()
-@Controller('/wdinext/api/pagetranslations')
+@Controller('/api/pagetranslations')
 export class RnPageTranslationsController {
 	constructor(private readonly rnUPageTranslationsService: RnPageTranslationsService) { }
 

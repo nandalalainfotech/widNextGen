@@ -21,13 +21,15 @@ export class RnCategoriesService {
 
 		const rnCategoriess = new RnCategories();
 		rnCategoriess.setProperties(rnCategoriesDTO);
+		rnCategoriess.createdBy = rnCategoriesDTO.createdBy;
+		rnCategoriess.createdAt = rnCategoriesDTO.createdAt;
 		await this.rnCategoriesRepository.save(rnCategoriess);
 		return rnCategoriess;
 	}
 	async update(rnCategoriesDTO: RnCategoriesDTO): Promise<RnCategories> {
 		const rnCategories = new RnCategories();
 		rnCategories.setProperties(rnCategoriesDTO);
-		await this.rnCategoriesRepository.update({ roleId: rnCategories.roleId }, rnCategories);
+		await this.rnCategoriesRepository.update({ id: rnCategories.id }, rnCategories);
 		return rnCategories;
 	}
 

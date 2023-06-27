@@ -5,7 +5,7 @@ import { RnCurrencies } from "src/entity/rn_currencies.entity";
 
 export class RnCategoriesDTO extends BaseDTO {
     @ApiModelProperty({})
-    categoryId: number;
+    id: string;
 
     @ApiModelProperty({})
     image: string;
@@ -13,19 +13,15 @@ export class RnCategoriesDTO extends BaseDTO {
     @ApiModelProperty({})
     status: number;
 
-    @ApiModelProperty({})
-    roleId: number;
-
 
 
     setProperties(rnCategoriesDTO: RnCategoriesDTO) {
-        this.categoryId = rnCategoriesDTO.categoryId;
+        this.id = rnCategoriesDTO.id;
         this.image = rnCategoriesDTO.image;
         this.status = rnCategoriesDTO.status;
-        this.roleId = rnCategoriesDTO.roleId;
-        this.insertUser = rnCategoriesDTO.insertUser;
-        this.insertDatetime = rnCategoriesDTO.insertDatetime;
-        this.updatedUser = rnCategoriesDTO.updatedUser;
-        this.updatedDatetime = rnCategoriesDTO.updatedDatetime;
+        this.createdBy = rnCategoriesDTO.createdBy;
+        this.createdAt = rnCategoriesDTO.createdAt;
+        this.updatedBy = rnCategoriesDTO.updatedBy;
+        this.updatedAt = rnCategoriesDTO.updatedAt;
       }
 }

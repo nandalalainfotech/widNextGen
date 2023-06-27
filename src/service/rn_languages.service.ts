@@ -34,6 +34,8 @@ export class RnLanguagesService {
 
 		const rnLanguages = new RnLanguages();
 		rnLanguages.setProperties(rnLanguagesDTO);
+		rnLanguages.createdBy = rnLanguagesDTO.createdBy;
+		rnLanguages.createdAt = rnLanguagesDTO.createdAt;
 		await this.rnLanguagesRepository.save(rnLanguages);
 		return rnLanguages;
 	}
@@ -46,10 +48,7 @@ export class RnLanguagesService {
 		rnLanguages.name = rnLanguagesDTO.name;
 		rnLanguages.locale = rnLanguagesDTO.locale;
 		rnLanguages.isoCode = rnLanguagesDTO.isoCode;
-		rnLanguages.updatedUser = rnLanguagesDTO.updatedUser;
-		rnLanguages.updatedDatetime = rnLanguagesDTO.updatedDatetime;
-		rnLanguages.updatedUser = rnLanguagesDTO.updatedUser;
-		rnLanguages.updatedDatetime = rnLanguagesDTO.updatedDatetime;
+
 
 		await this.rnLanguagesRepository.update({ id: rnLanguagesDTO.id }, rnLanguages);
 		return rnLanguages;
@@ -59,7 +58,7 @@ export class RnLanguagesService {
 
 	async findAll(): Promise<RnLanguages[]> {
 		console.log("RnLanguages==11", RnLanguages);
-		return this.rnLanguagesRepository.find({ relations: ["role"] });
+		return this.rnLanguagesRepository.find();
 	}
 
 	async findOne(Id: number): Promise<RnLanguages> {

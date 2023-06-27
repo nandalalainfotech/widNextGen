@@ -2,13 +2,12 @@ import { IsNotEmpty } from "class-validator";
 
 export class BaseDTO {
 
-    @IsNotEmpty()
-    insertUser: string;
+   
+    createdBy: string | null;
 
-    @IsNotEmpty()
-    insertDatetime: Date;
+    createdAt: Date | null;
+   
+    updatedBy: string | null;
 
-    updatedUser: string | null;
-    
-    updatedDatetime: Date | null;
+    updatedAt: Date | null;
 }
