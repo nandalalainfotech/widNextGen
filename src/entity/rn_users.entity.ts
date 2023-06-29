@@ -30,11 +30,11 @@ export class RnUsers {
   @Column("varchar", { name: "password", length: 100 })
   password: string;
 
-  @Column("varchar", { name: "mobile", nullable: true, length: 15 })
-  mobile: string | null;
-
   @Column("int", { name: "status", unsigned: true, default: () => "'0'" })
   status: number;
+
+  @Column("varchar", { name: "mobile", length: 14 })
+  mobile: string;
 
   @Column("varchar", { name: "email", length: 120 })
   email: string;
@@ -64,7 +64,6 @@ export class RnUsers {
   })
   @JoinColumn([{ name: "role_id", referencedColumnName: "id" }])
   role: RnRoles;
-
   
   setProperties(users: Users) {
     this.id = users.id;

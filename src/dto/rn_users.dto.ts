@@ -1,5 +1,6 @@
 
 import { ApiModelProperty } from "@nestjs/swagger/dist/decorators/api-model-property.decorator";
+import { IsEmail, IsNotEmpty, IsNumber, IsString, Matches } from "class-validator";
 import { RnUsers } from "src/entity/rn_users.entity";
 import { BaseDTO } from "./Base.dto";
 
@@ -10,6 +11,7 @@ export class Users extends BaseDTO {
 
     id: string;
 
+    @IsNotEmpty()
     @ApiModelProperty({})
     firstName: string;
 
@@ -21,17 +23,24 @@ export class Users extends BaseDTO {
 
     @ApiModelProperty({})
     roleId: string;
-  
+
+    @IsEmail()
     @ApiModelProperty({})
     email: string;
 
+    @IsNotEmpty()
     @ApiModelProperty({})
     password: string;
 
+    @IsNotEmpty()
+    @IsNumber()
     @ApiModelProperty({})
     status: number;
 
-    //   @isMobilePhone()
+
+    // @IsString()
+    // @IsNotEmpty()
+    // @Matches(/^\+[1-9]\d{1,14}$/)
     @ApiModelProperty({})
     mobile: string | null;
 
@@ -58,3 +67,5 @@ export class Users extends BaseDTO {
 
     }
 }
+
+
